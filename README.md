@@ -1,6 +1,7 @@
 ## Requirements 
 
 - Node.js : Install the latest LTS Version of Node.js from [https://nodejs.org/](https://nodejs.org/).
+- Docker : Install Docker on your pc from [https://www.docker.com/](https://www.docker.com/)
 
 ## Installations
 
