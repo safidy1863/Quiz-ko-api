@@ -69,5 +69,9 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "prisma" : {
+    "schema" : "src/infrastructure/data/prisma/schema",
+    "migrateOutput" : "src/infrastructure/data/prisma/migrations"
   }
 }

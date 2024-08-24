@@ -1,0 +1,14 @@
+enum Role {
+    STUDENT
+    ADMIN
+}
+
+model User {
+  id            String     @id                      @default(uuid())
+  lastName      String     @db.VarChar(50)
+  firstName     String?    @db.VarChar(60)
+  email         String     @db.VarChar(100)         @unique
+  password      String     @db.VarChar(120)
+  role          Role       @default(STUDENT)
+  student       Student?
+}

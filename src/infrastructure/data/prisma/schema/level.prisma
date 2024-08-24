@@ -1,0 +1,5 @@
+model Level {
+    id          String          @id            @default(uuid())
+    label       String
+    class       Class[]
+}
