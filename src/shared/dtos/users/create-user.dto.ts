@@ -27,5 +27,5 @@ export class CreateUserDto {
     @ApiProperty({
         example : 'STUDENT'
     })
-    role: "STUDENT" | "ADMIN" // TODO : change to UserRole
+    role: "STUDENT" | "ADMIN" // TODO : change to UserRole enum
 }
