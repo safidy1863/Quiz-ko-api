@@ -10,6 +10,7 @@ export class CreateUserMapper extends Mapper<CreateUserDto, UserEntity> {
     user.firstName = data.firstName;
     user.email = data.email;
     user.role = data.role;
+    user.password = data.password
 
     return user;
   }
