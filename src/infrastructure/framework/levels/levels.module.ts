@@ -5,7 +5,7 @@ import {
   PrismaService,
 } from 'src/infrastructure/data/prisma';
 import { LevelsRepository } from 'src/core';
-import { CreateLevelUseCase } from 'src/use-cases';
+import { CreateLevelUseCase, FindAllLevelsUseCase } from 'src/use-cases';
 
 @Module({
   controllers: [LevelsController],
@@ -20,6 +20,12 @@ import { CreateLevelUseCase } from 'src/use-cases';
       provide: CreateLevelUseCase,
       useFactory: (repository: LevelsRepository) =>
         new CreateLevelUseCase(repository),
+      inject: [LevelsRepository],
+    },
+    {
+      provide: FindAllLevelsUseCase,
+      useFactory: (repository: LevelsRepository) =>
+        new FindAllLevelsUseCase(repository),
       inject: [LevelsRepository],
     },
   ],

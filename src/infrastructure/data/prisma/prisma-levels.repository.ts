@@ -7,8 +7,9 @@ export class PrismaLevelsRepository implements LevelsRepository {
   async create(data: LevelEntity): Promise<LevelEntity> {
     return this.prisma.level.create({ data });
   }
-  findAll(filer?: Partial<LevelEntity>): Promise<LevelEntity[]> {
-    throw new Error('Method not implemented.');
+
+  async findAll(filter?: Partial<LevelEntity>): Promise<LevelEntity[]> {
+    return this.prisma.level.findMany({ where: filter });
   }
   findOne(id: string): Promise<LevelEntity> {
     throw new Error('Method not implemented.');
