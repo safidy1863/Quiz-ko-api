@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { UserRole } from "src/shared/enums";
 
 export class CreateUserDto {
     @ApiProperty({
@@ -27,5 +28,5 @@ export class CreateUserDto {
     @ApiProperty({
         example : 'STUDENT'
     })
-    role: "STUDENT" | "ADMIN" // TODO : change to UserRole enum
+    role:  UserRole
 }

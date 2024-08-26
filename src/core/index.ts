@@ -1,3 +1,3 @@
-export * from './base'
-export * from './domain'
-export * from './repositories'
+export * from './base';
+export * from './domain';
+export * from './repositories';
