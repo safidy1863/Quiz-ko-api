@@ -5,7 +5,12 @@ import {
   PrismaService,
 } from 'src/infrastructure/data/prisma';
 import { LevelsRepository } from 'src/core';
-import { CreateLevelUseCase, FindAllLevelsUseCase } from 'src/use-cases';
+import {
+  CreateLevelUseCase,
+  DeleteLevelUseCase,
+  FindAllLevelsUseCase,
+  UpdateLevelUseCase,
+} from 'src/use-cases';
 
 @Module({
   controllers: [LevelsController],
@@ -17,15 +22,27 @@ import { CreateLevelUseCase, FindAllLevelsUseCase } from 'src/use-cases';
       inject: [PrismaService],
     },
     {
+      provide: FindAllLevelsUseCase,
+      useFactory: (repository: LevelsRepository) =>
+        new FindAllLevelsUseCase(repository),
+      inject: [LevelsRepository],
+    },
+    {
       provide: CreateLevelUseCase,
       useFactory: (repository: LevelsRepository) =>
         new CreateLevelUseCase(repository),
       inject: [LevelsRepository],
     },
     {
-      provide: FindAllLevelsUseCase,
+      provide: UpdateLevelUseCase,
       useFactory: (repository: LevelsRepository) =>
-        new FindAllLevelsUseCase(repository),
+        new UpdateLevelUseCase(repository),
+      inject: [LevelsRepository],
+    },
+    {
+      provide: DeleteLevelUseCase,
+      useFactory: (repository: LevelsRepository) =>
+        new DeleteLevelUseCase(repository),
       inject: [LevelsRepository],
     },
   ],

@@ -1,23 +1,50 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
+import { ApiParam, ApiTags } from '@nestjs/swagger';
 import { CreateLevelDto } from 'src/shared';
-import { CreateLevelUseCase, FindAllLevelsUseCase } from 'src/use-cases';
+import {
+  CreateLevelUseCase,
+  DeleteLevelUseCase,
+  FindAllLevelsUseCase,
+  UpdateLevelUseCase,
+} from 'src/use-cases';
 
 @ApiTags('levels')
 @Controller('levels')
 export class LevelsController {
   constructor(
-    private createLevelUseCase: CreateLevelUseCase,
     private findAllLevelsUseCase: FindAllLevelsUseCase,
+    private createLevelUseCase: CreateLevelUseCase,
+    private updateLevelUseCase: UpdateLevelUseCase,
+    private deleteLevelUseCase: DeleteLevelUseCase,
   ) {}
+
+  @Get()
+  findAll() {
+    return this.findAllLevelsUseCase.execute();
+  }
 
   @Post()
   create(@Body() createLevelDto: CreateLevelDto) {
     return this.createLevelUseCase.execute(createLevelDto);
   }
 
-  @Get()
-  findAll() {
-    return this.findAllLevelsUseCase.execute();
+  @ApiParam({ name: 'id', type: 'string' })
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateLevelDto: CreateLevelDto) {
+    return this.updateLevelUseCase.execute(id, updateLevelDto);
+  }
+
+  @ApiParam({ name: 'id', type: 'string' })
+  @Delete(':id')
+  delete(@Param('id') id: string) {
+    return this.deleteLevelUseCase.execute(id);
   }
 }
