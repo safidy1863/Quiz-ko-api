@@ -9,6 +9,7 @@ import {
   CreateCategoryUseCase,
   DeleteCategoryUseCase,
   FindAllCategoriesUseCase,
+  FindOneCategoryUseCase,
   UpdateCategoryUseCase,
 } from 'src/use-cases';
 
@@ -25,6 +26,12 @@ import {
       provide: FindAllCategoriesUseCase,
       useFactory: (repository: CategoriesRepository) =>
         new FindAllCategoriesUseCase(repository),
+      inject: [CategoriesRepository],
+    },
+    {
+      provide: FindOneCategoryUseCase,
+      useFactory: (repository: CategoriesRepository) =>
+        new FindOneCategoryUseCase(repository),
       inject: [CategoriesRepository],
     },
     {

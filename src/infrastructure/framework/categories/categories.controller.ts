@@ -13,6 +13,7 @@ import {
   CreateCategoryUseCase,
   DeleteCategoryUseCase,
   FindAllCategoriesUseCase,
+  FindOneCategoryUseCase,
   UpdateCategoryUseCase,
 } from 'src/use-cases';
 
@@ -21,6 +22,7 @@ import {
 export class CategoriesController {
   constructor(
     private findAllCategoriesUseCase: FindAllCategoriesUseCase,
+    private findOneCategoryUseCase: FindOneCategoryUseCase,
     private createCategoryUseCase: CreateCategoryUseCase,
     private updateCategoryUseCase: UpdateCategoryUseCase,
     private deleteCategoryUseCase: DeleteCategoryUseCase,
@@ -31,6 +33,12 @@ export class CategoriesController {
     return this.findAllCategoriesUseCase.execute();
   }
 
+  @ApiParam({ name: 'id', type: 'string' })
+  @Get(':id')
+  find(@Param('id') id: string) {
+    return this.findOneCategoryUseCase.execute(id);
+  }
+
   @Post()
   create(@Body() createCategoryDto: CreateCategoryDto) {
     return this.createCategoryUseCase.execute(createCategoryDto);
@@ -38,7 +46,10 @@ export class CategoriesController {
 
   @ApiParam({ name: 'id', type: 'string' })
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCategoryDto: CreateCategoryDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateCategoryDto: CreateCategoryDto,
+  ) {
     return this.updateCategoryUseCase.execute(id, updateCategoryDto);
   }
 

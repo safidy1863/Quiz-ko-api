@@ -12,8 +12,8 @@ export class PrismaCategoriesRepository implements CategoriesRepository {
     return this.prisma.category.findMany({ where: filter });
   }
 
-  findOne(id: string): Promise<CategoryEntity> {
-    throw new Error('Method not implemented.');
+  async findOne(id: string): Promise<CategoryEntity> {
+    return this.prisma.category.findUnique({where : {id}})
   }
 
   async update(id: string, data: Partial<CategoryEntity>): Promise<CategoryEntity> {

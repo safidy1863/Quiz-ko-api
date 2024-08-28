@@ -9,6 +9,7 @@ import {
   CreateLevelUseCase,
   DeleteLevelUseCase,
   FindAllLevelsUseCase,
+  FindOneLevelUseCase,
   UpdateLevelUseCase,
 } from 'src/use-cases';
 
@@ -25,6 +26,12 @@ import {
       provide: FindAllLevelsUseCase,
       useFactory: (repository: LevelsRepository) =>
         new FindAllLevelsUseCase(repository),
+      inject: [LevelsRepository],
+    },
+    {
+      provide: FindOneLevelUseCase,
+      useFactory: (repository: LevelsRepository) =>
+        new FindOneLevelUseCase(repository),
       inject: [LevelsRepository],
     },
     {

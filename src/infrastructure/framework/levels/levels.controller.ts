@@ -13,6 +13,7 @@ import {
   CreateLevelUseCase,
   DeleteLevelUseCase,
   FindAllLevelsUseCase,
+  FindOneLevelUseCase,
   UpdateLevelUseCase,
 } from 'src/use-cases';
 
@@ -21,6 +22,7 @@ import {
 export class LevelsController {
   constructor(
     private findAllLevelsUseCase: FindAllLevelsUseCase,
+    private findOneLevelUseCase: FindOneLevelUseCase,
     private createLevelUseCase: CreateLevelUseCase,
     private updateLevelUseCase: UpdateLevelUseCase,
     private deleteLevelUseCase: DeleteLevelUseCase,
@@ -29,6 +31,12 @@ export class LevelsController {
   @Get()
   findAll() {
     return this.findAllLevelsUseCase.execute();
+  }
+
+  @ApiParam({ name: 'id', type: 'string' })
+  @Get(':id')
+  find(@Param('id') id: string) {
+    return this.findOneLevelUseCase.execute(id);
   }
 
   @Post()
