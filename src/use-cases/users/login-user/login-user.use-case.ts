@@ -4,7 +4,7 @@ import {
   UseCase,
   UsersRepository,
 } from 'src/core';
-import { CreateUserDto, encrypt } from 'src/shared';
+import { CreateUserDto, encrypt, LoginUserDto } from 'src/shared';
 
 export class LoginUserUseCase implements UseCase<CreateUserDto> {
   private createUserMapper: CreateUserMapper;
@@ -16,6 +16,8 @@ export class LoginUserUseCase implements UseCase<CreateUserDto> {
   }
 
   public async execute(user: CreateUserDto): Promise<CreateUserDto> {
+    
+
     const entity = this.createUserMapper.mapFrom(user);
     const password = await encrypt(entity.password);
     const createdUser = await this.repository.create({
