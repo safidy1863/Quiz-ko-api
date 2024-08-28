@@ -1,23 +1,23 @@
 import {
-  CreatedLevelMapper,
-  CreateLevelMapper,
-  LevelsRepository,
+  CreatedCategoryMapper,
+  CreateCategoryMapper,
+  CategoriesRepository,
   UseCase,
 } from 'src/core';
-import { CreatedLevelDto, CreateLevelDto } from 'src/shared';
+import { CreatedCategoryDto, CreateCategoryDto } from 'src/shared';
 
-export class CreateLevelUseCase implements UseCase<CreateLevelDto> {
-  private createLevelMapper: CreateLevelMapper;
-  private createdLevelMapper: CreatedLevelMapper;
+export class CreateCategoryUseCase implements UseCase<CreateCategoryDto> {
+  private createCategoryMapper: CreateCategoryMapper;
+  private createdCategoryMapper: CreatedCategoryMapper;
 
-  constructor(private readonly repository: LevelsRepository) {
-    this.createLevelMapper = new CreateLevelMapper();
-    this.createdLevelMapper = new CreatedLevelMapper();
+  constructor(private readonly repository: CategoriesRepository) {
+    this.createCategoryMapper = new CreateCategoryMapper();
+    this.createdCategoryMapper = new CreatedCategoryMapper();
   }
 
-  public async execute(level: CreateLevelDto): Promise<CreatedLevelDto> {
-    const entity = this.createLevelMapper.mapFrom(level);
-    const createdLevel = await this.repository.create(entity);
-    return this.createdLevelMapper.mapTo(createdLevel);
+  public async execute(Category: CreateCategoryDto): Promise<CreatedCategoryDto> {
+    const entity = this.createCategoryMapper.mapFrom(Category);
+    const createdCategory = await this.repository.create(entity);
+    return this.createdCategoryMapper.mapTo(createdCategory);
   }
 }
