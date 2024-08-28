@@ -7,4 +7,7 @@ async function encrypt(data: string) {
   return dataHashed;
 }
 
-export { encrypt };
+async function isMatch(data: string, hashedData: string) {
+  return await bcrypt.compare(data, hashedData);
+}
+export { encrypt, isMatch };

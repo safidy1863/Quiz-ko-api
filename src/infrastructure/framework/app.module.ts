@@ -6,6 +6,6 @@ import { CategoriesModule } from './categories';
 import { ClassModule } from './class';
 
 @Module({
-  imports: [AuthModule, UsersModule, LevelsModule, CategoriesModule, ClassModule],
+  imports: [AuthModule, LevelsModule, CategoriesModule, ClassModule],
 })
 export class AppModule {}
