@@ -17,6 +17,7 @@ export class CreatedUserMapper implements Mapper<CreatedUserDto, UserEntity> {
   public mapTo(data: UserEntity): CreatedUserDto {
     const user = new CreatedUserDto();
 
+    user.id = data.id;
     user.lastName = data.lastName;
     user.firstName = data.firstName;
     user.email = data.email;
