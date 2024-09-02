@@ -3,15 +3,15 @@ import { CategoriesController } from './categories.controller';
 import {
   PrismaCategoriesRepository,
   PrismaService,
-} from 'src/infrastructure/data/prisma';
-import { CategoriesRepository } from 'src/core';
+} from '@/infrastructure/data/prisma';
+import { CategoriesRepository } from '@/core';
 import {
   CreateCategoryUseCase,
   DeleteCategoryUseCase,
   FindAllCategoriesUseCase,
   FindOneCategoryUseCase,
   UpdateCategoryUseCase,
-} from 'src/use-cases';
+} from '@/use-cases';
 
 @Module({
   controllers: [CategoriesController],

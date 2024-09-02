@@ -1,4 +1,4 @@
-import { CategoryEntity, CategoriesRepository } from 'src/core';
+import { CategoryEntity, CategoriesRepository } from '@/core';
 import { PrismaService } from './prisma.service';
 
 export class PrismaCategoriesRepository implements CategoriesRepository {

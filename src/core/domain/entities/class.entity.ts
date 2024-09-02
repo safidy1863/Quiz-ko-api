@@ -1,4 +1,4 @@
-import { Entity } from 'src/core/base';
+import { Entity } from "@/core/base";
 
 export class ClassEntity extends Entity {
   group: string;

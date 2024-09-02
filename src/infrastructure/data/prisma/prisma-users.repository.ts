@@ -1,4 +1,4 @@
-import { UserEntity, UsersRepository } from 'src/core';
+import { UserEntity, UsersRepository } from '@/core';
 import { PrismaService } from './prisma.service';
 
 export class PrismaUsersRepository implements UsersRepository {

@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { CreateUserDto } from 'src/shared';
-import { CreateUserUseCase } from 'src/use-cases';
+import { CreateUserDto } from '@/shared';
+import { CreateUserUseCase } from '@/use-cases';
 
 @ApiTags("users")
 @Controller('users')

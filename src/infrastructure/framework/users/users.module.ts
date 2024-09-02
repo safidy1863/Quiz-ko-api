@@ -3,9 +3,9 @@ import { UsersController } from './users.controller';
 import {
   PrismaService,
   PrismaUsersRepository,
-} from 'src/infrastructure/data/prisma';
-import { UsersRepository } from 'src/core';
-import { CreateUserUseCase } from 'src/use-cases';
+} from '@/infrastructure/data/prisma';
+import { UsersRepository } from '@/core';
+import { CreateUserUseCase } from '@/use-cases';
 
 @Module({
   controllers: [UsersController],

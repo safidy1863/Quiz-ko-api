@@ -1,4 +1,4 @@
-import { LevelEntity, LevelsRepository, Repository } from 'src/core';
+import { LevelEntity, LevelsRepository, Repository } from '@/core';
 import { RepositoryCacheMemory } from './repository-cache-memory';
 
 export class LevelsCacheMemoryRepository

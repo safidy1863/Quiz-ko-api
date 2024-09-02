@@ -1,5 +1,5 @@
-import { CreatedCategoryMapper, CategoriesRepository, UseCase } from 'src/core';
-import { CreatedCategoryDto } from 'src/shared';
+import { CreatedCategoryMapper, CategoriesRepository, UseCase } from '@/core';
+import { CreatedCategoryDto } from '@/shared';
 
 export class FindOneCategoryUseCase implements UseCase<CreatedCategoryDto> {
   private createdCategoryMapper: CreatedCategoryMapper;

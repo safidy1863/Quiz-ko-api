@@ -1,5 +1,5 @@
-import { CreatedLevelMapper, LevelsRepository, UseCase } from 'src/core';
-import { CreatedLevelDto } from 'src/shared';
+import { CreatedLevelMapper, LevelsRepository, UseCase } from '@/core';
+import { CreatedLevelDto } from '@/shared';
 
 export class FindAllLevelsUseCase implements UseCase<CreatedLevelDto[]> {
   private createdLevelMapper: CreatedLevelMapper;

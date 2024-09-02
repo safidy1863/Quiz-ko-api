@@ -5,19 +5,19 @@ import {
   PrismaClassRepository,
   PrismaLevelsRepository,
   PrismaService,
-} from 'src/infrastructure/data/prisma';
+} from '@/infrastructure/data/prisma';
 import {
   CategoriesRepository,
   ClassRepository,
   LevelsRepository,
-} from 'src/core';
+} from '@/core';
 import {
   CreateClassUseCase,
   DeleteClassUseCase,
   FindAllClassUseCase,
   FindOneClassUseCase,
   UpdateClassUseCase,
-} from 'src/use-cases';
+} from '@/use-cases';
 
 @Module({
   controllers: [ClassController],

@@ -1,4 +1,4 @@
-import { LevelEntity, LevelsRepository } from 'src/core';
+import { LevelEntity, LevelsRepository } from '@/core';
 import { PrismaService } from './prisma.service';
 
 export class PrismaLevelsRepository implements LevelsRepository {

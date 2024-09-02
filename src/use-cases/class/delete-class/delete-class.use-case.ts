@@ -1,5 +1,5 @@
-import { ClassRepository, UseCase } from 'src/core';
-import { successMessage } from 'src/shared';
+import { ClassRepository, UseCase } from '@/core';
+import { successMessage } from '@/shared';
 
 export class DeleteClassUseCase implements UseCase<string> {
   constructor(private readonly repository: ClassRepository) {}

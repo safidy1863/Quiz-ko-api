@@ -1,5 +1,5 @@
-import { CategoriesRepository, UseCase } from 'src/core';
-import { successMessage } from 'src/shared';
+import { CategoriesRepository, UseCase } from '@/core';
+import { successMessage } from '@/shared';
 
 export class DeleteCategoryUseCase implements UseCase<string> {
   constructor(private readonly repository: CategoriesRepository) {}

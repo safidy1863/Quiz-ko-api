@@ -1,6 +1,6 @@
-import { Mapper } from 'src/core/base';
-import { ClassEntity } from 'src/core/domain/entities';
-import { CreateClassDto } from 'src/shared';
+import { Mapper } from '@/core/base';
+import { ClassEntity } from '@/core/domain/entities';
+import { CreateClassDto } from '@/shared';
 
 export class CreateClassMapper extends Mapper<CreateClassDto, ClassEntity> {
   public mapFrom(data: CreateClassDto): ClassEntity {

@@ -6,8 +6,8 @@ import {
   CreatedLevelMapper,
   CategoriesRepository,
   LevelsRepository,
-} from 'src/core';
-import { CreatedClassDto } from 'src/shared';
+} from '@/core';
+import { CreatedClassDto } from '@/shared';
 
 export class FindAllClassUseCase implements UseCase<CreatedClassDto[]> {
   private createdClassMapper: CreatedClassMapper;

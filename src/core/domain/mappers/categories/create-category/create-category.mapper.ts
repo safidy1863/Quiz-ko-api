@@ -1,6 +1,6 @@
-import { Mapper } from 'src/core/base';
-import { CategoryEntity } from 'src/core/domain/entities';
-import { CreateCategoryDto } from 'src/shared';
+import { Mapper } from '@/core/base';
+import { CategoryEntity } from '@/core/domain/entities';
+import { CreateCategoryDto } from '@/shared';
 
 export class CreateCategoryMapper extends Mapper<CreateCategoryDto, CategoryEntity> {
   public mapFrom(data: CreateCategoryDto): CategoryEntity {

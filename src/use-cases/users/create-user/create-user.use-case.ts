@@ -3,8 +3,8 @@ import {
   CreateUserMapper,
   UseCase,
   UsersRepository,
-} from 'src/core';
-import { CreateUserDto, encrypt } from 'src/shared';
+} from '@/core';
+import { CreateUserDto, encrypt } from '@/shared';
 
 export class CreateUserUseCase implements UseCase<CreateUserDto> {
   private createUserMapper: CreateUserMapper;

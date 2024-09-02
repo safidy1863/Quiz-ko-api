@@ -1,5 +1,5 @@
-import { LevelsRepository, UseCase } from 'src/core';
-import { successMessage } from 'src/shared';
+import { LevelsRepository, UseCase } from '@/core';
+import { successMessage } from '@/shared';
 
 export class DeleteLevelUseCase implements UseCase<string> {
   constructor(private readonly repository: LevelsRepository) {}

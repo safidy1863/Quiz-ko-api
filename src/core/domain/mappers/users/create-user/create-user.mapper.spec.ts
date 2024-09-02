@@ -25,7 +25,7 @@ describe('CreateUserMapper', () => {
       password,
       role,
     });
-    expect(user).toEqual({ lastName, email, password });
+    expect(user).toEqual({ lastName, email, password, firstName, role });
   });
 
   it('should map to', () => {
@@ -35,8 +35,8 @@ describe('CreateUserMapper', () => {
       firstName,
       role,
       email,
-      password
+      password,
     });
-    expect(user).toEqual({ id: 1, lastName, email, password });
+    expect(user).toEqual({ lastName, email, firstName, role});
   });
 });

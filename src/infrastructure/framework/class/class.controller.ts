@@ -8,14 +8,14 @@ import {
   Post,
 } from '@nestjs/common';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
-import { CreateClassDto } from 'src/shared';
+import { CreateClassDto } from '@/shared';
 import {
   CreateClassUseCase,
   DeleteClassUseCase,
   FindAllClassUseCase,
   FindOneClassUseCase,
   UpdateClassUseCase,
-} from 'src/use-cases';
+} from '@/use-cases';
 
 @ApiTags('class')
 @Controller('class')

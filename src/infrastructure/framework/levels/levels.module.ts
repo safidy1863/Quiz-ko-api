@@ -3,15 +3,15 @@ import { LevelsController } from './levels.controller';
 import {
   PrismaLevelsRepository,
   PrismaService,
-} from 'src/infrastructure/data/prisma';
-import { LevelsRepository } from 'src/core';
+} from '@/infrastructure/data/prisma';
+import { LevelsRepository } from '@/core';
 import {
   CreateLevelUseCase,
   DeleteLevelUseCase,
   FindAllLevelsUseCase,
   FindOneLevelUseCase,
   UpdateLevelUseCase,
-} from 'src/use-cases';
+} from '@/use-cases';
 
 @Module({
   controllers: [LevelsController],

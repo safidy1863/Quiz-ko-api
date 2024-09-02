@@ -3,8 +3,8 @@ import {
   CreateCategoryMapper,
   CategoriesRepository,
   UseCase,
-} from 'src/core';
-import { CreatedCategoryDto, CreateCategoryDto } from 'src/shared';
+} from '@/core';
+import { CreatedCategoryDto, CreateCategoryDto } from '@/shared';
 
 export class CreateCategoryUseCase implements UseCase<CreateCategoryDto> {
   private createCategoryMapper: CreateCategoryMapper;

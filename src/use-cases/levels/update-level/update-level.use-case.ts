@@ -3,8 +3,8 @@ import {
   CreateLevelMapper,
   LevelsRepository,
   UseCase,
-} from 'src/core';
-import { CreateLevelDto } from 'src/shared';
+} from '@/core';
+import { CreateLevelDto } from '@/shared';
 
 export class UpdateLevelUseCase implements UseCase<CreateLevelDto> {
   private updateLevelMapper: CreateLevelMapper;

@@ -8,14 +8,14 @@ import {
   Post,
 } from '@nestjs/common';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
-import { CreateLevelDto } from 'src/shared';
+import { CreateLevelDto } from '@/shared';
 import {
   CreateLevelUseCase,
   DeleteLevelUseCase,
   FindAllLevelsUseCase,
   FindOneLevelUseCase,
   UpdateLevelUseCase,
-} from 'src/use-cases';
+} from '@/use-cases';
 
 @ApiTags('levels')
 @Controller('levels')

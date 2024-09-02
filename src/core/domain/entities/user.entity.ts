@@ -1,5 +1,5 @@
-import { Entity } from "src/core/base";
-import { UserRole } from "src/shared";
+import { Entity } from "@/core/base"
+import { UserRole } from "@/shared"
 
 export class UserEntity extends Entity {
     lastName: string

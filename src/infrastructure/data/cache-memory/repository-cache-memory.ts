@@ -1,4 +1,4 @@
-import { Entity, Repository } from 'src/core';
+import { Entity, Repository } from '@/core';
 
 export class RepositoryCacheMemory<
   TEntity extends Entity,

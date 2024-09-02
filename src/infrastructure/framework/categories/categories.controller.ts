@@ -8,14 +8,14 @@ import {
   Post,
 } from '@nestjs/common';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
-import { CreateCategoryDto } from 'src/shared';
+import { CreateCategoryDto } from '@/shared';
 import {
   CreateCategoryUseCase,
   DeleteCategoryUseCase,
   FindAllCategoriesUseCase,
   FindOneCategoryUseCase,
   UpdateCategoryUseCase,
-} from 'src/use-cases';
+} from '@/use-cases';
 
 @ApiTags('categories')
 @Controller('categories')

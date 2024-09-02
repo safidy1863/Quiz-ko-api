@@ -1,4 +1,4 @@
-import { ClassEntity, ClassRepository } from 'src/core';
+import { ClassEntity, ClassRepository } from '@/core';
 import { PrismaService } from './prisma.service';
 
 export class PrismaClassRepository implements ClassRepository {

@@ -3,8 +3,8 @@ import {
   CreateClassMapper,
   ClassRepository,
   UseCase,
-} from 'src/core';
-import { CreatedClassDto, CreateClassDto } from 'src/shared';
+} from '@/core';
+import { CreatedClassDto, CreateClassDto } from '@/shared';
 
 export class CreateClassUseCase implements UseCase<CreateClassDto> {
   private createClassMapper: CreateClassMapper;
