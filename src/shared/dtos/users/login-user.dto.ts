@@ -1,0 +1,15 @@
+import { ApiProperty } from "@nestjs/swagger";
+import { UserRole } from "@/shared/enums";
+
+export class LoginUserDto {
+    @ApiProperty({
+        example : 'johndoe@gmail.com'
+    })
+    email : string
+
+
+    @ApiProperty({
+        example : '123456789'
+    })
+    password: string
+}

@@ -1,0 +1,9 @@
+model Class {
+    id          String         @id                  @default(uuid())
+    group       String         @db.VarChar(10)
+    levelId     String
+    level       Level          @relation(fields: [levelId],references: [id])
+    categoryId  String
+    category    Category       @relation(fields: [categoryId],references: [id])
+    students    Student[]
+}
