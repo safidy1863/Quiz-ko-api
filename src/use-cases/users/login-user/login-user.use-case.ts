@@ -4,7 +4,7 @@ import {
   UseCase,
   UsersRepository,
 } from '@/core';
-import { CreateUserDto, encrypt, LoginUserDto } from '@/shared';
+import { CreateUserDto, encrypt, isMatch, LoginUserDto } from '@/shared';
 import { FindOneByEmailUserUseCase, FindOneUserUseCase } from '../find-one-user';
 
 export class LoginUserUseCase implements UseCase<CreateUserDto> {
@@ -18,11 +18,15 @@ export class LoginUserUseCase implements UseCase<CreateUserDto> {
     this.findOneByEmailUserUseCase = new FindOneByEmailUserUseCase(repository)
   }
 
-  public async execute(user: LoginUserDto): Promise<CreateUserDto> {
+  public async execute(user: LoginUserDto) {
     
-    const entity = this.findOneByEmailUserUseCase.execute(user.email);
-    const password = await encrypt(user.password);
-    
+    const entity = await this.findOneByEmailUserUseCase.execute(user.email);    
+    const matched = await isMatch(user.password, entity.password)
+
+    if (!matched) {
+      return { message: "Bonjour" }
+    }
+
     return this.createdUserMapper.mapTo(entity);
   }
 }
