@@ -3,6 +3,7 @@ import { PrismaService } from './prisma.service';
 
 export class PrismaUsersRepository implements UsersRepository {
   constructor(private prisma: PrismaService) {}
+  
 
   async create(data: UserEntity): Promise<UserEntity> {
     return this.prisma.user.create({ data });
@@ -15,6 +16,9 @@ export class PrismaUsersRepository implements UsersRepository {
   async findOne(id : string): Promise<UserEntity> {
     return this.prisma.user.findUnique({ where: {id } });
   }
+
+  async findByEmail(email: string): Promise<UserEntity> {
+    return this.prisma.user.findFirst({ where: { email } });  }
 
   async update(id: string, data: Partial<UserEntity>): Promise<UserEntity> {
     return this.prisma.user.update({ where: { id }, data });
