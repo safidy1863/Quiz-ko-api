@@ -7,8 +7,18 @@ import {
 import { UsersRepository } from '@/core';
 import { CreateUserUseCase } from '@/use-cases';
 import { LoginUserUseCase } from '@/use-cases/users/login-user';
+import { JwtModule, JwtService } from '@nestjs/jwt';
+import { UsersModule } from '../users';
+import { jwtConstants } from '@/shared';
 
 @Module({
+  imports: [
+    JwtModule.register({
+      global: true,
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '60s' },
+    }),
+  ],
   controllers: [AuthController],
   providers: [
     PrismaService,
@@ -25,9 +35,9 @@ import { LoginUserUseCase } from '@/use-cases/users/login-user';
     },
     {
       provide: LoginUserUseCase,
-      useFactory: (repository: UsersRepository) =>
-        new LoginUserUseCase(repository),
-      inject: [UsersRepository],
+      useFactory: (repository: UsersRepository, jwtService: JwtService) =>
+        new LoginUserUseCase(repository, jwtService),
+      inject: [UsersRepository, JwtService],
     },
   ],
 })
