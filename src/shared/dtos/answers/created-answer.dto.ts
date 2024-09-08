@@ -3,6 +3,6 @@ export class CreatedAnswerDto {
     id: string;
     label: string;
     isCorrect: boolean;
-    question: CreatedQuestionDto;
+    //question: CreatedQuestionDto;
     questionId: string;
 }

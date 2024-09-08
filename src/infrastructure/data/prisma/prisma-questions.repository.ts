@@ -7,35 +7,7 @@ import { PrismaService } from './prisma.service';
   constructor(private prisma: PrismaService) {}
 
   async create(data: QuestionEntity): Promise<QuestionEntity> {
-    //return this.prisma.question.create({ data });
-    // const question = await this.prisma.question.create({
-    //     data: {
-    //       label: data.label,
-    //       title: data.title,
-    //       description: data.description,
-    //       point: data.point,
-    //       type: data.type,
-    //       answers: {
-    //         create: data.answers.map(answer => ({
-    //           label: answer.label,
-    //           isCorrect: answer.isCorrect,
-    //         })),
-    //       },
-    //     },
-    //     include: {
-    //       answers: true, 
-    //     },
-    //   });
-    
-    //   return {
-    //     ...question,
-    //     answers: question.answers.map(answer => ({
-    //       id: answer.id,
-    //       label: answer.label,
-    //       questionId: question.id,
-    //       isCorrect: answer.isCorrect,
-    //     })),
-    //   };
+
     return this.prisma.question.create({
       data: {
         label: data.label,
@@ -66,9 +38,39 @@ import { PrismaService } from './prisma.service';
      return this.prisma.question.findUnique({ where: { id }, include: { answers: true },});
   }
 
-  async update(id: string, data: Partial<QuestionEntity>): Promise<QuestionEntity> {
-    return this.prisma.question.findUnique({ where: { id }, include: { answers: true },});
+ async update(id: string, data: Partial<QuestionEntity>): Promise<QuestionEntity> {
+    const { answers, ...questionData } = data;
+  
+    const updatedQuestion = await this.prisma.question.update({
+      where: { id: id },
+      data: {
+        ...questionData,
+        answers: {
+          upsert: answers.map((answer) => ({
+            where: { id: answer.id ?? 0 }, // Check if answer exists by ID
+            create: {
+              label: answer.label,
+              isCorrect: answer.isCorrect,
+            },
+            update: {
+              label: answer.label,
+              isCorrect: answer.isCorrect,
+            },
+          })),
+          deleteMany: {
+            questionId: id,
+            id: { notIn: answers.filter((a) => a.id).map((a) => a.id) },
+          },
+        },
+      },
+      include: {
+        answers: true,
+      },
+    });
+  
+    return updatedQuestion;
   }
+  
 
   async remove(id: string): Promise<void> {
     await this.prisma.question.delete({ where: { id } });
