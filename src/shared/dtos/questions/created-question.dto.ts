@@ -3,6 +3,7 @@ import { CreatedAnswerDto } from '../answers';
 export declare class CreatedQuestionDto {
     id: string;
     title: string;
+    label: string;
     description: string;
     point: number;
     type: QuestionType;

@@ -8,6 +8,7 @@ export class CreateQuestionMapper extends Mapper<CreateQuestionDto, QuestionEnti
     const question = new QuestionEntity();
 
     question.title = data.title;
+    question.label = data.label;
     question.description=data.description;
     question.point=data.point;
     question.type=data.type;

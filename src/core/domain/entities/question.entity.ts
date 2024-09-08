@@ -5,6 +5,7 @@ import { CreateAnswerDto } from "@/shared/dtos/answers";
 
 export class QuestionEntity extends Entity {
     title: string;
+    label: string;
     description: string;
     point: number;
     type: QuestionType;
