@@ -38,40 +38,37 @@ import { PrismaService } from './prisma.service';
      return this.prisma.question.findUnique({ where: { id }, include: { answers: true },});
   }
 
- async update(id: string, data: Partial<QuestionEntity>): Promise<QuestionEntity> {
+  async update(id: string, data: Partial<QuestionEntity>): Promise<QuestionEntity> {
     const { answers, ...questionData } = data;
   
-    const updatedQuestion = await this.prisma.question.update({
-      where: { id: id },
-      data: {
-        ...questionData,
-        answers: {
-          upsert: answers.map((answer) => ({
-            where: { id: answer.id ?? 0 }, // Check if answer exists by ID
-            create: {
+    const updatedQuestion = await this.prisma.$transaction(async (prisma) => {
+      // Delete all existing answers for this question
+      await prisma.answer.deleteMany({
+        where: { questionId: id },
+      });
+  
+      //Update the question and add the new answers
+      const updatedQuestion = await prisma.question.update({
+        where: { id: id },
+        data: {
+          ...questionData,
+          answers: {
+            create: answers.map((answer) => ({
               label: answer.label,
               isCorrect: answer.isCorrect,
-            },
-            update: {
-              label: answer.label,
-              isCorrect: answer.isCorrect,
-            },
-          })),
-          deleteMany: {
-            questionId: id,
-            id: { notIn: answers.filter((a) => a.id).map((a) => a.id) },
+            })),
           },
         },
-      },
-      include: {
-        answers: true,
-      },
+        include: {
+          answers: true, // Include answers in the returned question object
+        },
+      });
+  
+      return updatedQuestion;
     });
   
     return updatedQuestion;
-  }
-  
-
+  }  
   async remove(id: string): Promise<void> {
     await this.prisma.question.delete({ where: { id } });
   }
