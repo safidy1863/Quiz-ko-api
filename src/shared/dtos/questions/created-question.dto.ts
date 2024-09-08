@@ -1,6 +1,6 @@
 import { QuestionType } from 'src/shared/enums/question-type.enum';
 import { CreatedAnswerDto } from '../answers';
-export declare class CreatedQuestionDto {
+export class CreatedQuestionDto {
     id: string;
     title: string;
     label: string;

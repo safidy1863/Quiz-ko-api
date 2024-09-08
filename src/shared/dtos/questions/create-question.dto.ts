@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { QuestionType } from "src/shared/enums/question-type.enum";
 import { CreateAnswerDto } from "../answers";
 
-export declare class CreateQuestionDto {
+export class CreateQuestionDto {
     id?: string;
 
     @ApiProperty({
@@ -26,7 +26,7 @@ export declare class CreateQuestionDto {
     point: number;
 
     @ApiProperty({
-        example: 'QCM',
+        example: 'SINGLE',
     })
     type: QuestionType;
 

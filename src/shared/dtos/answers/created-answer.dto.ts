@@ -1,5 +1,5 @@
 import { CreatedQuestionDto } from '../questions';
-export declare class CreatedAnswerDto {
+export class CreatedAnswerDto {
     id: string;
     label: string;
     isCorrect: boolean;
