@@ -11,4 +11,5 @@ model Question {
   point       Int
   type        QuestionType
   answers     Answer[]   
+  subjects    Subject[] @relation("SubjectQuestions")
 }
