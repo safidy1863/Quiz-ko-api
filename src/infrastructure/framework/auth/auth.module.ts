@@ -9,14 +9,14 @@ import { CreateUserUseCase } from '@/use-cases';
 import { LoginUserUseCase } from '@/use-cases/users/login-user';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { UsersModule } from '../users';
-import { jwtConstants } from '@/shared';
+import env from '@/shared/constants/env';
 
 @Module({
   imports: [
     JwtModule.register({
       global: true,
-      secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' },
+      secret: env().jwt.secret,
+      signOptions: { expiresIn: env().jwt.expiresIn },
     }),
   ],
   controllers: [AuthController],

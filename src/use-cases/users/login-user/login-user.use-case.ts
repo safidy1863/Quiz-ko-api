@@ -17,6 +17,7 @@ import {
   FindOneUserUseCase,
 } from '../find-one-user';
 import { JwtService } from '@nestjs/jwt';
+import { NotFoundException, UnauthorizedException } from '@nestjs/common';
 
 export class LoginUserUseCase implements UseCase<LoggeddUserDto> {
   private createUserMapper: CreateUserMapper;
@@ -37,12 +38,12 @@ export class LoginUserUseCase implements UseCase<LoggeddUserDto> {
       user.email,
     );
     if (!userSelected) {
-      return { message: errorMessage().userNotFound };
+      throw new NotFoundException(errorMessage().userNotFound)
     }
 
     const matched = await isMatch(user.password, userSelected.password);
     if (!matched) {
-      return { message: errorMessage().errorPassword };
+      throw new UnauthorizedException(errorMessage().errorPassword)
     }
 
     const payload = {
