@@ -6,8 +6,9 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiParam, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiParam, ApiTags } from '@nestjs/swagger';
 import { CreateCategoryDto } from '@/shared';
 import {
   CreateCategoryUseCase,
@@ -16,7 +17,10 @@ import {
   FindOneCategoryUseCase,
   UpdateCategoryUseCase,
 } from '@/use-cases';
+import { AuthGuard } from '@/infrastructure/adapters';
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard)
 @ApiTags('categories')
 @Controller('categories')
 export class CategoriesController {
