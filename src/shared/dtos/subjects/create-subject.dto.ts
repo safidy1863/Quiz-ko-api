@@ -4,7 +4,7 @@ export class CreateSubjectDto {
   id?: string;
 
   @ApiProperty({
-    example: 'GB',
+    example: 'Sujet 1',
   })
   label: string;
 

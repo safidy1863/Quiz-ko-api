@@ -19,18 +19,21 @@ export class CreatedSubjectMapper extends Mapper<CreatedSubjectDto, SubjectEntit
     const subject = new CreatedSubjectDto();
     subject.id = data.id;
     subject.label = data.label;
-    subject.questions = data.questions.map(question => {
+    subject.questionIds = data.questionIds;
+
+    subject.questions = Array.isArray(data.questions) ? data.questions.map(question => {
       const addedQuestion = new CreatedQuestionDto();
       if (!question.id) {
-        throw new Error("Missing ID for answer in CreatedQuestionDto");
+        throw new Error("Missing ID for question in CreatedQuestionDto");
       }
       addedQuestion.id = question.id;  
       addedQuestion.label = question.label;
       addedQuestion.title = question.title;
-      addedQuestion.description=question.description;
-      addedQuestion.point=question.point;
-      addedQuestion.type=question.type;
-      addedQuestion.answers = question.answers.map(answer => {
+      addedQuestion.description = question.description;
+      addedQuestion.point = question.point;
+      addedQuestion.type = question.type;
+      
+      addedQuestion.answers = Array.isArray(question.answers) ? question.answers.map(answer => {
         const questiondAnswer = new CreatedAnswerDto();
         if (!answer.id) {
           throw new Error("Missing ID for answer in CreatedAnswerDto");
@@ -40,9 +43,11 @@ export class CreatedSubjectMapper extends Mapper<CreatedSubjectDto, SubjectEntit
         questiondAnswer.isCorrect = answer.isCorrect;
     
         return questiondAnswer;
-      });
+      }) : []; 
+      
       return addedQuestion;
-    });  
+    }) : []; 
+  
     return subject;
   }
-}
+  }
