@@ -6,8 +6,9 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiParam, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiParam, ApiTags } from '@nestjs/swagger';
 import { CreateLevelDto } from '@/shared';
 import {
   CreateLevelUseCase,
@@ -16,7 +17,10 @@ import {
   FindOneLevelUseCase,
   UpdateLevelUseCase,
 } from '@/use-cases';
+import { AuthGuard } from '@/infrastructure/adapters';
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard)
 @ApiTags('levels')
 @Controller('levels')
 export class LevelsController {

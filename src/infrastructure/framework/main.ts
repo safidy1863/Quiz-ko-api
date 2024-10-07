@@ -9,10 +9,13 @@ async function bootstrap() {
     .setTitle("Quiz'ko")
     .setDescription("This is the API for the Quiz'ko app")
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
+
+  app.enableCors();
 
   await app.listen(3000);
 }

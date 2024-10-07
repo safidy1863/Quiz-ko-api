@@ -6,8 +6,9 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiParam, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiParam, ApiTags } from '@nestjs/swagger';
 import { CreateClassDto } from '@/shared';
 import {
   CreateClassUseCase,
@@ -16,7 +17,10 @@ import {
   FindOneClassUseCase,
   UpdateClassUseCase,
 } from '@/use-cases';
+import { AuthGuard } from '@/infrastructure/adapters';
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard)
 @ApiTags('class')
 @Controller('class')
 export class ClassController {
