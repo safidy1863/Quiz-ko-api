@@ -1,5 +1,5 @@
-import {  CreatedUserMapper, LevelsRepository, UseCase, UsersRepository } from '@/core';
-import { CreatedLevelDto, CreatedUserDto } from '@/shared';
+import { CreatedUserMapper, UseCase, UsersRepository } from '@/core';
+import { CreatedUserDto } from '@/shared';
 
 export class FindOneUserUseCase implements UseCase<CreatedUserDto> {
   private createdUserMapper: CreatedUserMapper;
@@ -8,7 +8,7 @@ export class FindOneUserUseCase implements UseCase<CreatedUserDto> {
     this.createdUserMapper = new CreatedUserMapper();
   }
 
-  public async execute(id : string): Promise<CreatedUserDto> {
+  public async execute(id: string): Promise<CreatedUserDto> {
     const level = await this.repository.findOne(id);
     return this.createdUserMapper.mapTo(level);
   }

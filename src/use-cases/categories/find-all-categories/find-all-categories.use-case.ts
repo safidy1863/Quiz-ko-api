@@ -10,6 +10,8 @@ export class FindAllCategoriesUseCase implements UseCase<CreatedCategoryDto[]> {
 
   public async execute(): Promise<CreatedCategoryDto[]> {
     const categories = await this.repository.findAll();
-    return categories.map((category) => this.createdCategoryMapper.mapTo(category));
+    return categories.map((category) =>
+      this.createdCategoryMapper.mapTo(category),
+    );
   }
 }
