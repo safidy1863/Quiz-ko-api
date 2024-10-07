@@ -8,7 +8,6 @@ import { UsersRepository } from '@/core';
 import { CreateUserUseCase } from '@/use-cases';
 import { LoginUserUseCase } from '@/use-cases/users/login-user';
 import { JwtModule, JwtService } from '@nestjs/jwt';
-import { UsersModule } from '../users';
 import env from '@/shared/constants/env';
 
 @Module({
