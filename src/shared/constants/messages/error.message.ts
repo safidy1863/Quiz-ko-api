@@ -3,5 +3,6 @@ export const errorMessage = (model?: string) => {
     userNotFound: 'Aucun compte associé à cette adresse e-mail.',
     errorPassword: 'Mot de passe incorrect. Veuillez réessayer!',
     emailAdressAlreadyExist: "L'adresse email existe déjà",
+    classNotFound: "Class id n'existe pas",
   };
 };

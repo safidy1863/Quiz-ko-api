@@ -13,7 +13,7 @@ import {
   CreatedLevelMapper,
 } from '@/core';
 import { CreatedUserDto, CreateUserDto, encrypt, errorMessage } from '@/shared';
-import { ConflictException } from '@nestjs/common';
+import { ConflictException, NotFoundException } from '@nestjs/common';
 
 export class CreateUserUseCase implements UseCase<CreatedUserDto> {
   private createUserMapper: CreateUserMapper;
@@ -39,12 +39,17 @@ export class CreateUserUseCase implements UseCase<CreatedUserDto> {
   }
 
   public async execute(user: CreateUserDto): Promise<CreatedUserDto> {
+    // Throw exception
     const userSelected = await this.repository.findByEmail(user.email);
-
     if (userSelected) {
       throw new ConflictException(errorMessage().emailAdressAlreadyExist);
     }
+    const classSelected = await this.classRepository.findOne(user.classId);
+    if (user.role === 'STUDENT' && !classSelected) {
+      throw new NotFoundException(errorMessage().classNotFound);
+    }
 
+    // Operation
     const entity = this.createUserMapper.mapFrom(user);
     const password = await encrypt(entity.password);
     const createdUser = await this.repository.create({
