@@ -20,6 +20,7 @@ export class CreateStudentMapper extends Mapper<
   public mapTo(data: StudentEntity): CreateStudentDto {
     const student = new CreateStudentDto();
 
+    student.id = data.id;
     student.registrationNumber = data.registrationNumber;
     student.gender = data.gender;
     student.phone = data.phone;

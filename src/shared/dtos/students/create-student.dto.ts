@@ -10,6 +10,8 @@ import {
 import { Gender, GenderEnum } from '../../enums';
 
 export class CreateStudentDto {
+  id: string;
+
   @IsString()
   @MinLength(2, {
     message: "Le numéro d'inscription doit contenir au moin 2 caractères.",

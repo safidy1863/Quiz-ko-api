@@ -1,29 +1,28 @@
 import { Mapper } from '@/core/base';
-import { CreateStudentDto } from '@/shared';
+import { CreatedStudentDto } from '@/shared';
 import { StudentEntity } from '@/core/domain/entities';
 
-export class CreateStudentMapper extends Mapper<
-  CreateStudentDto,
+export class CreatedStudentMapper extends Mapper<
+  CreatedStudentDto,
   StudentEntity
 > {
-  public mapFrom(data: CreateStudentDto): StudentEntity {
+  public mapFrom(data: CreatedStudentDto): StudentEntity {
     const student = new StudentEntity();
 
     student.registrationNumber = data.registrationNumber;
     student.gender = data.gender;
     student.phone = data.phone;
-    student.classId = data.classId;
 
     return student;
   }
 
-  public mapTo(data: StudentEntity): CreateStudentDto {
-    const student = new CreateStudentDto();
+  public mapTo(data: StudentEntity, idUser: string): CreatedStudentDto {
+    const student = new CreatedStudentDto();
 
+    student.id = idUser;
     student.registrationNumber = data.registrationNumber;
     student.gender = data.gender;
     student.phone = data.phone;
-    student.classId = data.classId;
 
     return student;
   }

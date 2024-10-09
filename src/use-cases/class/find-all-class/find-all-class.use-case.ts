@@ -36,7 +36,7 @@ export class FindAllClassUseCase implements UseCase<CreatedClassDto[]> {
         const level = await this.levelRepository.findOne(classRoom.levelId);
         const createdLevel = this.createdLevelMapper.mapTo(level);
 
-        return this.createdClassMapper.mapAllRelation(
+        return this.createdClassMapper.mapTo(
           classRoom,
           createdCategory,
           createdLevel,
