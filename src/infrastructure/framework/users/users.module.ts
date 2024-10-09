@@ -2,9 +2,10 @@ import { Module } from '@nestjs/common';
 import { UsersController } from './users.controller';
 import {
   PrismaService,
+  PrismaStudentsRepository,
   PrismaUsersRepository,
 } from '@/infrastructure/data/prisma';
-import { UsersRepository } from '@/core';
+import { StudentsRepository, UsersRepository } from '@/core';
 import { CreateUserUseCase } from '@/use-cases';
 
 @Module({
@@ -17,10 +18,18 @@ import { CreateUserUseCase } from '@/use-cases';
       inject: [PrismaService],
     },
     {
+      provide: StudentsRepository,
+      useFactory: (prisma: PrismaService) =>
+        new PrismaStudentsRepository(prisma),
+      inject: [PrismaService],
+    },
+    {
       provide: CreateUserUseCase,
-      useFactory: (repository: UsersRepository) =>
-        new CreateUserUseCase(repository),
-      inject: [UsersRepository],
+      useFactory: (
+        repository: UsersRepository,
+        studentRepository: StudentsRepository,
+      ) => new CreateUserUseCase(repository, studentRepository),
+      inject: [UsersRepository, StudentsRepository],
     },
   ],
 })
