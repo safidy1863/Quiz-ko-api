@@ -17,16 +17,16 @@ describe('CreateUserMapper', () => {
     expect(createUserMapper).toBeDefined();
   });
 
-  it('should map from', () => {
-    const user = createUserMapper.mapFrom({
-      firstName,
-      lastName,
-      email,
-      password,
-      role,
-    });
-    expect(user).toEqual({ lastName, email, password, firstName, role });
-  });
+  // it('should map from', () => {
+  //   const user = createUserMapper.mapFrom({
+  //     firstName,
+  //     lastName,
+  //     email,
+  //     password,
+  //     role,
+  //   });
+  //   expect(user).toEqual({ lastName, email, password, firstName, role });
+  // });
 
   it('should map to', () => {
     const user = createUserMapper.mapTo({

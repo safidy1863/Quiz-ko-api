@@ -69,15 +69,23 @@ import {
     },
     {
       provide: CreateClassUseCase,
-      useFactory: (repository: ClassRepository) =>
-        new CreateClassUseCase(repository),
-      inject: [ClassRepository],
+      useFactory: (
+        repository: ClassRepository,
+        categoryRepository: CategoriesRepository,
+        levelRepository: LevelsRepository,
+      ) =>
+        new CreateClassUseCase(repository, categoryRepository, levelRepository),
+      inject: [ClassRepository, CategoriesRepository, LevelsRepository],
     },
     {
       provide: UpdateClassUseCase,
-      useFactory: (repository: ClassRepository) =>
-        new UpdateClassUseCase(repository),
-      inject: [ClassRepository],
+      useFactory: (
+        repository: ClassRepository,
+        categoryRepository: CategoriesRepository,
+        levelRepository: LevelsRepository,
+      ) =>
+        new UpdateClassUseCase(repository, categoryRepository, levelRepository),
+      inject: [ClassRepository, CategoriesRepository, LevelsRepository],
     },
     {
       provide: DeleteClassUseCase,

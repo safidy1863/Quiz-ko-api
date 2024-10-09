@@ -4,11 +4,11 @@ enum Gender {
 }
 
 model Student {
-    id                      String         @unique
-    registrationNumber      String         @db.VarChar(20)
-    gender                  Role
-    phone                   String         @db.VarChar(20)
-    user                    User           @relation(fields: [id], references: [id])
-    classId                 String?
-    class                   Class?          @relation(fields: [classId], references: [id])
+    id                 String  @unique
+    registrationNumber String  @unique         @db.VarChar(20)
+    gender             Gender
+    phone              String  @db.VarChar(20)
+    user               User    @relation(fields: [id], references: [id])
+    classId            String?
+    class              Class?  @relation(fields: [classId], references: [id])
 }

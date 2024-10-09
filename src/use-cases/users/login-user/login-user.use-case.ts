@@ -1,23 +1,32 @@
-import { UseCase, UsersRepository } from '@/core';
+import {
+  StudentsRepository,
+  UseCase,
+  UserEntity,
+  UsersRepository,
+} from '@/core';
 import { errorMessage, isMatch, LoggeddUserDto, LoginUserDto } from '@/shared';
-import { FindOneByEmailUserUseCase } from '../find-one-user';
 import { JwtService } from '@nestjs/jwt';
 import { NotFoundException, UnauthorizedException } from '@nestjs/common';
 
 export class LoginUserUseCase implements UseCase<LoggeddUserDto> {
-  private findOneByEmailUserUseCase: FindOneByEmailUserUseCase;
-
   constructor(
     private readonly repository: UsersRepository,
+    private readonly studentRepository: StudentsRepository,
     private jwtService: JwtService,
-  ) {
-    this.findOneByEmailUserUseCase = new FindOneByEmailUserUseCase(repository);
-  }
+  ) {}
 
   public async execute(user: LoginUserDto) {
-    const userSelected = await this.findOneByEmailUserUseCase.execute(
-      user.email,
-    );
+    let userSelected: UserEntity;
+    userSelected = await this.repository.findByEmail(user.identifiant);
+
+    if (!userSelected) {
+      const student = await this.studentRepository.findByRegisterNumber(
+        user.identifiant,
+      );
+
+      if (student) userSelected = await this.repository.findOne(student.id);
+    }
+
     if (!userSelected) {
       throw new NotFoundException(errorMessage().userNotFound);
     }
@@ -29,7 +38,7 @@ export class LoginUserUseCase implements UseCase<LoggeddUserDto> {
 
     const payload = {
       sub: userSelected.id,
-      email: userSelected.email,
+      identifiant: userSelected.email,
     };
 
     return {

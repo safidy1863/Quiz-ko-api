@@ -3,24 +3,47 @@ import {
   CreateClassMapper,
   ClassRepository,
   UseCase,
+  CreatedCategoryMapper,
+  CreatedLevelMapper,
+  CategoriesRepository,
+  LevelsRepository,
 } from '@/core';
-import { CreateClassDto } from '@/shared';
+import { CreateClassDto, CreatedClassDto } from '@/shared';
 
-export class UpdateClassUseCase implements UseCase<CreateClassDto> {
+export class UpdateClassUseCase implements UseCase<CreatedClassDto> {
   private updateClassMapper: CreateClassMapper;
   private updatedClassMapper: CreatedClassMapper;
+  private createdCategoryMapper: CreatedCategoryMapper;
+  private createdLevelMapper: CreatedLevelMapper;
 
-  constructor(private readonly repository: ClassRepository) {
+  constructor(
+    private readonly repository: ClassRepository,
+    private readonly categoryRepository: CategoriesRepository,
+    private readonly levelRepository: LevelsRepository,
+  ) {
     this.updateClassMapper = new CreateClassMapper();
     this.updatedClassMapper = new CreatedClassMapper();
+    this.createdCategoryMapper = new CreatedCategoryMapper();
+    this.createdLevelMapper = new CreatedLevelMapper();
   }
 
   public async execute(
     id: string,
     classRoom: CreateClassDto,
-  ): Promise<CreateClassDto> {
+  ): Promise<CreatedClassDto> {
     const entity = this.updateClassMapper.mapFrom(classRoom);
     const updatedClass = await this.repository.update(id, entity);
-    return this.updatedClassMapper.mapTo(updatedClass);
+    const category = await this.categoryRepository.findOne(
+      classRoom.categoryId,
+    );
+    const createdCategory = this.createdCategoryMapper.mapTo(category);
+
+    const level = await this.levelRepository.findOne(classRoom.levelId);
+    const createdLevel = this.createdLevelMapper.mapTo(level);
+    return this.updatedClassMapper.mapTo(
+      updatedClass,
+      createdCategory,
+      createdLevel,
+    );
   }
 }
