@@ -45,8 +45,14 @@ export class CreateUserUseCase implements UseCase<CreatedUserDto> {
       throw new ConflictException(errorMessage().emailAdressAlreadyExist);
     }
     const classSelected = await this.classRepository.findOne(user.classId);
-    if (user.role === 'STUDENT' && !classSelected) {
-      throw new NotFoundException(errorMessage().classNotFound);
+    const registrationNumberSelected =
+      await this.studentRepository.findByRegisterNumber(
+        user.registrationNumber,
+      );
+    if (user.role === 'STUDENT') {
+      if (registrationNumberSelected) throw new ConflictException(errorMessage().registrationNumber);
+      if (!classSelected)
+        throw new NotFoundException(errorMessage().classNotFound);
     }
 
     // Operation

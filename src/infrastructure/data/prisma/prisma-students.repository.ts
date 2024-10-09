@@ -16,7 +16,14 @@ export class PrismaStudentsRepository implements StudentsRepository {
     return this.prisma.student.findUnique({ where: { id } });
   }
 
-  async update(id: string, data: Partial<StudentEntity>): Promise<StudentEntity> {
+  async findByRegisterNumber(registrationNumber: string): Promise<StudentEntity> {
+    return this.prisma.student.findFirst({ where: { registrationNumber } });
+  }
+
+  async update(
+    id: string,
+    data: Partial<StudentEntity>,
+  ): Promise<StudentEntity> {
     return this.prisma.student.update({ where: { id }, data });
   }
 

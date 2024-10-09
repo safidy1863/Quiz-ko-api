@@ -84,9 +84,12 @@ import env from '@/shared/constants/env';
     },
     {
       provide: LoginUserUseCase,
-      useFactory: (repository: UsersRepository, jwtService: JwtService) =>
-        new LoginUserUseCase(repository, jwtService),
-      inject: [UsersRepository, JwtService],
+      useFactory: (
+        repository: UsersRepository,
+        studentRepository: StudentsRepository,
+        jwtService: JwtService,
+      ) => new LoginUserUseCase(repository, studentRepository, jwtService),
+      inject: [UsersRepository, StudentsRepository, JwtService],
     },
   ],
 })
