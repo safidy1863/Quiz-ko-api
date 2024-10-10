@@ -5,11 +5,10 @@ enum QuestionType {
 }
 model Question {
   id          String    @id @default(uuid())
-  label       String
   title       String
   description String
-  point       Int
+  point       Float
   type        QuestionType
   answers     Answer[]   
-  subjects    Subject[] @relation("SubjectQuestions")
+  subjects    SubjectQuestions[]
 }

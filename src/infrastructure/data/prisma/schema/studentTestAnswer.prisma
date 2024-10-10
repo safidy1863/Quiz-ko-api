@@ -1,0 +1,11 @@
+model StudentTestAnswer {
+    testId          String
+    test            Test            @relation(fields: [testId], references: [id])
+    studentId       String
+    student         Student         @relation(fields: [studentId], references: [id])
+    answerId        String
+    answer          Answer          @relation(fields: [answerId],references: [id])
+    openAnswer      String?
+
+    @@id([testId, studentId,answerId])
+}

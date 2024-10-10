@@ -6,4 +6,5 @@ model Class {
     categoryId  String
     category    Category       @relation(fields: [categoryId],references: [id])
     students    Student[]
+    tests       TestsClass[]
 }

@@ -11,4 +11,6 @@ model Student {
     user               User    @relation(fields: [id], references: [id])
     classId            String?
     class              Class?  @relation(fields: [classId], references: [id])
+    results            Result[]
+    studentTestAnswer  StudentTestAnswer[]
 }
