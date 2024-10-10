@@ -1,0 +1,8 @@
+model SubjectQuestions {
+    questionId      String
+    question        Question        @relation(fields: [questionId], references: [id])
+    subjectId       String
+    subject         Subject         @relation(fields: [subjectId], references: [id])
+
+    @@id([questionId, subjectId])
+}

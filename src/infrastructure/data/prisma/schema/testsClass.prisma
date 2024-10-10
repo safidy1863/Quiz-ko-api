@@ -1,0 +1,8 @@
+model  TestsClass {
+    testId         String
+    test           Test         @relation(fields: [testId], references: [id])
+    classId        String
+    class          Class         @relation(fields: [classId], references: [id])
+
+    @@id([testId, classId])
+}

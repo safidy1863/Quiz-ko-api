@@ -65,7 +65,7 @@ export class CreateUserUseCase implements UseCase<CreatedUserDto> {
 
     if (user.role === 'STUDENT') {
       await this.studentRepository.create(
-        this.createStudentMapper.mapTo({ ...user, id: createdUser.id }),
+        this.createStudentMapper.mapTo({ ...user, userId: createdUser.id }),
       );
 
       const classRoom = await this.classRepository.findOne(user.classId);
@@ -78,7 +78,7 @@ export class CreateUserUseCase implements UseCase<CreatedUserDto> {
 
       return this.createdUserMapper.mapTo(
         createdUser,
-        this.createStudentMapper.mapFrom({ ...user, id: createdUser.id }),
+        this.createStudentMapper.mapFrom({ ...user, userId: createdUser.id }),
         this.createdClassMapper.mapTo(classRoom, createdCategory, createdLevel),
       );
     }
