@@ -5,17 +5,18 @@ import { CategoriesModule } from './categories';
 import { ClassModule } from './class';
 import { ConfigModule } from '@nestjs/config';
 import env from '@/shared/constants/env';
-
+import { TestsModule } from './tests';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load : [env]
+      load: [env],
     }),
     AuthModule,
     LevelsModule,
     CategoriesModule,
     ClassModule,
+    TestsModule,
   ],
 })
 export class AppModule {}

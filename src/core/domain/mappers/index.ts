@@ -4,3 +4,4 @@ export * from './categories';
 export * from './class';
 export * from './answers';
 export * from './students';
+export * from './tests-class';
