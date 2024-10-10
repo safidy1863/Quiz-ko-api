@@ -10,7 +10,8 @@ export class PrismaTestsClassRepository implements TestsClassRepository {
   findAll(filter?: Partial<TestClassEntity>): Promise<TestClassEntity[]> {
     throw new Error('Method not implemented.');
   }
-  findOne(id: string): Promise<TestClassEntity> {
+  
+  async findOne(id: string): Promise<TestClassEntity> {
     throw new Error('Method not implemented.');
   }
 

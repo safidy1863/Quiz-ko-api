@@ -1,5 +1,5 @@
 import { Mapper } from '@/core/base';
-import { CreatedClassDto, CreateTestDto, GetTestClassDto } from '@/shared';
+import { GetTestClassDto } from '@/shared';
 import {
   ClassEntity,
   TestClassEntity,
@@ -20,7 +20,7 @@ export class GetTestClassMapper extends Mapper<
   }
 
   public mapTo(
-    data: TestClassEntity,
+    _: TestClassEntity,
     classRoom: ClassEntity,
     test: TestEntity,
   ): GetTestClassDto {

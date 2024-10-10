@@ -8,3 +8,4 @@ export * from './subjects.repository';
 export * from './students.repository';
 export * from './tests.repository';
 export * from './tests-class.repository';
+export * from './subjects-questions.repository';

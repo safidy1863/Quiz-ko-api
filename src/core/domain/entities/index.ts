@@ -8,3 +8,4 @@ export * from './subject.entity';
 export * from './student.entity';
 export * from './test.entity';
 export * from './test-class.entity';
+export * from './subject-question.entity'
