@@ -6,3 +6,5 @@ export * from './question.entity';
 export * from './answer.entity';
 export * from './subject.entity';
 export * from './student.entity';
+export * from './test.entity';
+export * from './test-class.entity';
