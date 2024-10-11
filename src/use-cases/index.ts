@@ -5,3 +5,4 @@ export * from './categories';
 export * from './class';
 export * from './tests';
 export * from './subjects';
+export * from './questions';

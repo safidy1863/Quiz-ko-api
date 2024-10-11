@@ -8,6 +8,7 @@ import env from '@/shared/constants/env';
 import { TestsModule } from './tests';
 import { SubjectsModule } from './subjects';
 import { AnswersModule } from './answers';
+import { QuestionsModule } from './questions';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { AnswersModule } from './answers';
     CategoriesModule,
     ClassModule,
     SubjectsModule,
+    QuestionsModule,
     AnswersModule,
     TestsModule,
   ],
