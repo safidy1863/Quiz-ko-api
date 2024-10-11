@@ -1,6 +1,6 @@
 export enum QuestionEnum {
-    SINGLE = "SINGLE",
-    MULTIPLE = "MULTIPLE",
-    OPEN = "OPEN"
+  SINGLE = 'SINGLE',
+  MULTIPLE = 'MULTIPLE',
+  OPEN = 'OPEN',
 }
-export type QuestionType = "SINGLE" | "MULTIPLE" | "OPEN";
+export type QuestionType = 'SINGLE' | 'MULTIPLE' | 'OPEN';

@@ -1,1 +1,1 @@
-export * from './create-answer.mapper'
+export * from './create-answer.mapper';

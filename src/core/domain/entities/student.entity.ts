@@ -5,5 +5,6 @@ export class StudentEntity extends Entity {
   registrationNumber: string;
   gender: Gender;
   phone: string;
+  userId: string;
   classId: string;
 }

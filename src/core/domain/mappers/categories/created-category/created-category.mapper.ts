@@ -2,7 +2,10 @@ import { Mapper } from '@/core/base';
 import { CategoryEntity } from '@/core/domain/entities';
 import { CreatedCategoryDto } from '@/shared';
 
-export class CreatedCategoryMapper extends Mapper<CreatedCategoryDto, CategoryEntity> {
+export class CreatedCategoryMapper extends Mapper<
+  CreatedCategoryDto,
+  CategoryEntity
+> {
   public mapFrom(data: CreatedCategoryDto): CategoryEntity {
     const category = new CategoryEntity();
 

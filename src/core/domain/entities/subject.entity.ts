@@ -1,10 +1,5 @@
-import { Entity } from "@/core/base";
-import { QuestionEntity } from "./question.entity";
+import { Entity } from '@/core/base';
 
 export class SubjectEntity extends Entity {
-    label: string;
-    questionIds?: string[];
-    questions?: QuestionEntity[];
+  label: string;
 }
-
-

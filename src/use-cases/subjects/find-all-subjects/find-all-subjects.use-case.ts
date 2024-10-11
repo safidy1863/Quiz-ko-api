@@ -1,5 +1,5 @@
-import { CreatedSubjectMapper, SubjectsRepository, UseCase } from "@/core";
-import { CreatedSubjectDto } from "@/shared";
+import { UseCase, CreatedSubjectMapper, SubjectsRepository } from '@/core';
+import { CreatedSubjectDto } from '@/shared';
 
 export class FindAllSubjectsUseCase implements UseCase<CreatedSubjectDto[]> {
   private createdSubjectMapper: CreatedSubjectMapper;

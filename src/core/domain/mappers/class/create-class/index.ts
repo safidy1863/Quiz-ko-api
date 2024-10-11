@@ -1,1 +1,1 @@
-export * from './create-class.mapper'
+export * from './create-class.mapper';

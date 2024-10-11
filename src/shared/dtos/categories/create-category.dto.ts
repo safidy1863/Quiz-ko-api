@@ -7,7 +7,7 @@ export class CreateCategoryDto {
   @IsNotEmpty()
   @IsString()
   @MinLength(2, {
-    message : "Le nom de la catégorie doit contenir au moins 2 caractères."
+    message: 'Le nom de la catégorie doit contenir au moins 2 caractères.',
   })
   @ApiProperty({
     example: 'GB',

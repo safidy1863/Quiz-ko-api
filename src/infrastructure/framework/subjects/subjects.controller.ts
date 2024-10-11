@@ -1,58 +1,26 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-} from '@nestjs/common';
-import { ApiParam, ApiTags } from '@nestjs/swagger';
-import {
-  CreateSubjectUseCase,
-  DeleteSubjectUseCase,
-  FindAllSubjectsUseCase,
-  FindOneSubjectUseCase,
-  UpdateSubjectUseCase
-} from '@/use-cases';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateSubjectDto } from '@/shared';
+import { CreateSubjectUseCase, FindAllSubjectsUseCase } from '@/use-cases';
+import { AuthGuard } from '@/infrastructure/adapters';
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard)
 @ApiTags('subjects')
 @Controller('subjects')
 export class SubjectsController {
   constructor(
-    private findAllSubjectUseCase: FindAllSubjectsUseCase,
-    private findOneQSubjectUseCase: FindOneSubjectUseCase,
+    private findAllSubjectsUseCase: FindAllSubjectsUseCase,
     private createSubjectUseCase: CreateSubjectUseCase,
-     private updateSubjectUseCase: UpdateSubjectUseCase,
-     private deletSubjectUseCase: DeleteSubjectUseCase,
   ) {}
 
   @Get()
   findAll() {
-    return this.findAllSubjectUseCase.execute();
-  }
-
-  @ApiParam({ name: 'id', type: 'string' })
-  @Get(':id')
-  find(@Param('id') id: string) {
-    return this.findOneQSubjectUseCase.execute(id);
+    return this.findAllSubjectsUseCase.execute();
   }
 
   @Post()
   create(@Body() createSubjectDto: CreateSubjectDto) {
     return this.createSubjectUseCase.execute(createSubjectDto);
-  }
-
-  @ApiParam({ name: 'id', type: 'string' })
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSubjectDto: CreateSubjectDto) {
-    return this.updateSubjectUseCase.execute(id, updateSubjectDto);
-  }
-
-  @ApiParam({ name: 'id', type: 'string' })
-  @Delete(':id')
-  delete(@Param('id') id: string) {
-    return this.deletSubjectUseCase.execute(id);
   }
 }

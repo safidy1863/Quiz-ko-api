@@ -1,6 +1,13 @@
-import { CategoriesRepository, ClassRepository, CreatedCategoryMapper, CreatedClassMapper, CreatedLevelMapper, LevelsRepository, UseCase } from "@/core";
-import { CreatedClassDto } from "@/shared";
-
+import {
+  CategoriesRepository,
+  ClassRepository,
+  CreatedCategoryMapper,
+  CreatedClassMapper,
+  CreatedLevelMapper,
+  LevelsRepository,
+  UseCase,
+} from '@/core';
+import { CreatedClassDto } from '@/shared';
 
 export class FindOneClassUseCase implements UseCase<CreatedClassDto> {
   private createdClassMapper: CreatedClassMapper;

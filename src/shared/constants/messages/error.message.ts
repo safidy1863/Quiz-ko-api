@@ -1,4 +1,5 @@
-export const errorMessage = (model?: string) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const errorMessage = (_?: string) => {
   return {
     userNotFound:
       'Aucun compte associé à cette adresse e-mail/numéro matricule.',

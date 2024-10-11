@@ -7,8 +7,8 @@ export class CreateAnswerMapper extends Mapper<CreateAnswerDto, AnswerEntity> {
     const answer = new AnswerEntity();
 
     answer.label = data.label;
-    answer.isCorrect=data.isCorrect;
-    answer.questionId=data.questionId;
+    answer.isCorrect = data.isCorrect;
+    answer.questionId = data.questionId;
 
     return answer;
   }
@@ -17,8 +17,8 @@ export class CreateAnswerMapper extends Mapper<CreateAnswerDto, AnswerEntity> {
 
     answer.id = data.id;
     answer.label = data.label;
-    answer.isCorrect=data.isCorrect;
-    answer.questionId=data.questionId;
+    answer.isCorrect = data.isCorrect;
+    answer.questionId = data.questionId;
 
     return answer;
   }

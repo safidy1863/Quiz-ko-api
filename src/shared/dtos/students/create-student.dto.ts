@@ -10,7 +10,7 @@ import {
 import { Gender, GenderEnum } from '../../enums';
 
 export class CreateStudentDto {
-  id: string;
+  id?: string;
 
   @IsString()
   @MinLength(2, {
@@ -47,6 +47,18 @@ export class CreateStudentDto {
     example: '+261340000000',
   })
   phone: string;
+
+  @IsUUID('4', {
+    message:
+      "L'Id de l'utilisateur doit être une chaîne valide au format UUID version 4.",
+  })
+  @IsNotEmpty({
+    message: "L'Id de l'utilisateur de la classe est réquis.",
+  })
+  @ApiProperty({
+    example: '52540340-c63d-4a1a-b2fd-5aff60aea991',
+  })
+  userId: string;
 
   @IsUUID('4', {
     message:

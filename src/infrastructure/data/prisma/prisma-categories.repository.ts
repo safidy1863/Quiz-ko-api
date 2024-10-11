@@ -13,10 +13,13 @@ export class PrismaCategoriesRepository implements CategoriesRepository {
   }
 
   async findOne(id: string): Promise<CategoryEntity> {
-    return this.prisma.category.findUnique({where : {id}})
+    return this.prisma.category.findUnique({ where: { id } });
   }
 
-  async update(id: string, data: Partial<CategoryEntity>): Promise<CategoryEntity> {
+  async update(
+    id: string,
+    data: Partial<CategoryEntity>,
+  ): Promise<CategoryEntity> {
     return this.prisma.category.update({ where: { id }, data });
   }
 

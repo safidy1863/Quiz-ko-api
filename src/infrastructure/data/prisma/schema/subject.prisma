@@ -1,15 +1,6 @@
 model Subject {
-  id        String    @id @default(uuid())
-  label     String
-  questions Question[]  @relation("SubjectQuestions")
-  }
-
-// model SubjectQuestion {
-//   subjectId  String
-//   questionId String
-
-//   subject    Subject @relation(fields: [subjectId], references: [id])
-//   question   Question @relation(fields: [questionId], references: [id])
-
-//   @@id([subjectId, questionId])
-// }
+  id            String             @id @default(uuid())
+  label         String
+  questions     SubjectQuestions[]
+  tests         Test[]
+}
