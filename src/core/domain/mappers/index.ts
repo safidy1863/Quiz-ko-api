@@ -6,3 +6,4 @@ export * from './answers';
 export * from './students';
 export * from './tests-class';
 export * from './tests';
+export * from './subjects';

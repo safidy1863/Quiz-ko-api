@@ -1,7 +1,12 @@
-import { FindOneTestUseCase, FindTestsByClassIdUseCase } from '@/use-cases';
-import { Controller, Get, Param, UseGuards } from '@nestjs/common';
+import {
+  CreateTestUseCase,
+  FindOneTestUseCase,
+  FindTestsByClassIdUseCase,
+} from '@/use-cases';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiParam, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@/infrastructure/adapters';
+import { CreateTestDto } from '@/shared';
 
 @ApiBearerAuth()
 @UseGuards(AuthGuard)
@@ -11,6 +16,7 @@ export class TestsController {
   constructor(
     private readonly findTestsByClassIdUseCase: FindTestsByClassIdUseCase,
     private readonly findOneTest: FindOneTestUseCase,
+    private readonly createTestUseCase: CreateTestUseCase,
   ) {}
 
   @ApiParam({ name: 'id', type: 'string' })
@@ -23,5 +29,10 @@ export class TestsController {
   @Get(':classId')
   findByClassId(@Param('classId') classId: string) {
     return this.findTestsByClassIdUseCase.execute(classId);
+  }
+
+  @Post()
+  create(@Body() createTestDto: CreateTestDto) {
+    return this.createTestUseCase.execute(createTestDto);
   }
 }

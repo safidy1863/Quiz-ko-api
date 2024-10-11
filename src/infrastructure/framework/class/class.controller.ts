@@ -19,8 +19,6 @@ import {
 } from '@/use-cases';
 import { AuthGuard } from '@/infrastructure/adapters';
 
-@ApiBearerAuth()
-@UseGuards(AuthGuard)
 @ApiTags('class')
 @Controller('class')
 export class ClassController {
@@ -43,17 +41,23 @@ export class ClassController {
     return this.findOneClassUseCase.execute(id);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Post()
   create(@Body() createClassDto: CreateClassDto) {
     return this.createClassUseCase.execute(createClassDto);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @ApiParam({ name: 'id', type: 'string' })
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateClassDto: CreateClassDto) {
     return this.updateClassUseCase.execute(id, updateClassDto);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @ApiParam({ name: 'id', type: 'string' })
   @Delete(':id')
   delete(@Param('id') id: string) {

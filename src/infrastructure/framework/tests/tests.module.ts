@@ -3,11 +3,21 @@ import { TestsController } from './tests.controller';
 import {
   PrismaClassRepository,
   PrismaService,
+  PrismaSubjectsQuestionsRepository,
   PrismaTestsClassRepository,
   PrismaTestsRepository,
 } from '@/infrastructure/data/prisma';
-import { ClassRepository, TestsClassRepository, TestsRepository } from '@/core';
-import { FindTestsByClassIdUseCase } from '@/use-cases';
+import {
+  ClassRepository,
+  SubjectsQuestionsRepository,
+  TestsClassRepository,
+  TestsRepository,
+} from '@/core';
+import {
+  CreateTestUseCase,
+  FindOneTestUseCase,
+  FindTestsByClassIdUseCase,
+} from '@/use-cases';
 
 @Module({
   controllers: [TestsController],
@@ -30,6 +40,12 @@ import { FindTestsByClassIdUseCase } from '@/use-cases';
       inject: [PrismaService],
     },
     {
+      provide: SubjectsQuestionsRepository,
+      useFactory: (prisma: PrismaService) =>
+        new PrismaSubjectsQuestionsRepository(prisma),
+      inject: [PrismaService],
+    },
+    {
       provide: FindTestsByClassIdUseCase,
       useFactory: (
         testsClassRepository: TestsClassRepository,
@@ -42,6 +58,20 @@ import { FindTestsByClassIdUseCase } from '@/use-cases';
           classRepository,
         ),
       inject: [TestsClassRepository, TestsRepository, ClassRepository],
+    },
+    {
+      provide: FindOneTestUseCase,
+      useFactory: (
+        repository: TestsRepository,
+        subjectsQuestionsRepository: SubjectsQuestionsRepository,
+      ) => new FindOneTestUseCase(repository, subjectsQuestionsRepository),
+      inject: [TestsRepository, SubjectsQuestionsRepository],
+    },
+    {
+      provide: CreateTestUseCase,
+      useFactory: (repository: TestsRepository) =>
+        new CreateTestUseCase(repository),
+      inject: [TestsRepository],
     },
   ],
 })

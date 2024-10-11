@@ -6,6 +6,7 @@ import { ClassModule } from './class';
 import { ConfigModule } from '@nestjs/config';
 import env from '@/shared/constants/env';
 import { TestsModule } from './tests';
+import { SubjectsModule } from './subjects';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { TestsModule } from './tests';
     LevelsModule,
     CategoriesModule,
     ClassModule,
+    SubjectsModule,
     TestsModule,
   ],
 })
