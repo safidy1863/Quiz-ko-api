@@ -2,9 +2,14 @@ import {
   PrismaAnswersRepository,
   PrismaQuestionsRepository,
   PrismaService,
+  PrismaStudentTestAnswerRepository,
 } from '@/infrastructure/data/prisma';
 import { AnswersController } from './answers.controller';
-import { AnswersRepository, QuestionsRepository } from '@/core';
+import {
+  AnswersRepository,
+  QuestionsRepository,
+  StudentTestAnswerRepository,
+} from '@/core';
 import { Module } from '@nestjs/common';
 import { CreateAnswerUseCase } from '@/use-cases';
 
@@ -22,6 +27,12 @@ import { CreateAnswerUseCase } from '@/use-cases';
       provide: QuestionsRepository,
       useFactory: (prisma: PrismaService) =>
         new PrismaQuestionsRepository(prisma),
+      inject: [PrismaService],
+    },
+    {
+      provide: StudentTestAnswerRepository,
+      useFactory: (prisma: PrismaService) =>
+        new PrismaStudentTestAnswerRepository(prisma),
       inject: [PrismaService],
     },
     {

@@ -1,7 +1,10 @@
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateAnswerDto } from '@/shared';
-import { CreateAnswerUseCase } from '@/use-cases';
+import {
+  CreateAnswerUseCase,
+  CreateStudentTestAnswerUseCase,
+} from '@/use-cases';
 import { AuthGuard } from '@/infrastructure/adapters';
 
 @ApiBearerAuth()
@@ -9,10 +12,23 @@ import { AuthGuard } from '@/infrastructure/adapters';
 @ApiTags('answers')
 @Controller('answers')
 export class AnswersController {
-  constructor(private createAnswerUseCase: CreateAnswerUseCase) {}
+  constructor(
+    private createAnswerUseCase: CreateAnswerUseCase,
+    private createStudentTestAnswerUseCase: CreateStudentTestAnswerUseCase,
+  ) {}
 
   @Post()
   create(@Body() createAnswerDto: CreateAnswerDto) {
     return this.createAnswerUseCase.execute(createAnswerDto);
   }
+
+  // @Post('choice')
+  // createTestAnswer(
+  //   @Body() createStudentTestAnswer: CreateStudentTestAnswerDto,
+  // ) {
+  //   return this.createStudentTestAnswerUseCase.execute(
+  //     createStudentTestAnswer,
+  //     '',
+  //   );
+  // }
 }

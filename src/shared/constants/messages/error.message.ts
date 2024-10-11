@@ -10,5 +10,6 @@ export const errorMessage = (_?: string) => {
     questionNotFound: "Question id n'existe pas",
     subjectNotFound: "Subject id n'existe pas",
     testNotFound: "Test id n'existe pas",
+    studentNotFound: "Test id n'existe pas",
   };
 };

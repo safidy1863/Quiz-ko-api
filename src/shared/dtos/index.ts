@@ -9,3 +9,4 @@ export * from './tests';
 export * from './tests-class';
 export * from './questions';
 export * from './subjects-questions';
+export * from './student-test-answer';

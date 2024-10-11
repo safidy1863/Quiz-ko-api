@@ -10,3 +10,4 @@ export * from './prisma-subjects.repository';
 export * from './prisma-subjects-questions.repository';
 export * from './prisma-answers.repository';
 export * from './prisma-questions.repository';
+export * from './prisma-student-test-answer.repository';
