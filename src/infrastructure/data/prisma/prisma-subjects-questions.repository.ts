@@ -7,8 +7,8 @@ export class PrismaSubjectsQuestionsRepository
 {
   constructor(private prisma: PrismaService) {}
 
-  create(data: SubjectQuestionEntity): Promise<SubjectQuestionEntity> {
-    throw new Error('Method not implemented.');
+  async create(data: SubjectQuestionEntity): Promise<SubjectQuestionEntity> {
+    return this.prisma.subjectQuestions.create({ data });
   }
   findAll(
     filter?: Partial<SubjectQuestionEntity>,

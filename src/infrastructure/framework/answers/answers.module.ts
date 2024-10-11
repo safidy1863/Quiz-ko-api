@@ -1,9 +1,10 @@
 import {
   PrismaAnswersRepository,
+  PrismaQuestionsRepository,
   PrismaService,
 } from '@/infrastructure/data/prisma';
 import { AnswersController } from './answers.controller';
-import { AnswersRepository } from '@/core';
+import { AnswersRepository, QuestionsRepository } from '@/core';
 import { Module } from '@nestjs/common';
 import { CreateAnswerUseCase } from '@/use-cases';
 
@@ -18,10 +19,18 @@ import { CreateAnswerUseCase } from '@/use-cases';
       inject: [PrismaService],
     },
     {
+      provide: QuestionsRepository,
+      useFactory: (prisma: PrismaService) =>
+        new PrismaQuestionsRepository(prisma),
+      inject: [PrismaService],
+    },
+    {
       provide: CreateAnswerUseCase,
-      useFactory: (repository: AnswersRepository) =>
-        new CreateAnswerUseCase(repository),
-      inject: [AnswersRepository],
+      useFactory: (
+        repository: AnswersRepository,
+        questionsRepository: QuestionsRepository,
+      ) => new CreateAnswerUseCase(repository, questionsRepository),
+      inject: [AnswersRepository, QuestionsRepository],
     },
   ],
 })

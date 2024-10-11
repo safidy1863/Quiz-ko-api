@@ -26,7 +26,7 @@ export class TestsController {
   }
 
   @ApiParam({ name: 'classId', type: 'string' })
-  @Get(':classId')
+  @Get('by-class/:classId')
   findByClassId(@Param('classId') classId: string) {
     return this.findTestsByClassIdUseCase.execute(classId);
   }

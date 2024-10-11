@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { QuestionsRepository, QuestionEntity } from '@/core';
 import { PrismaService } from './prisma.service';
 
@@ -8,11 +9,12 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
     return this.prisma.question.create({ data });
   }
 
-  findAll(filter?: Partial<QuestionEntity>): Promise<QuestionEntity[]> {
-    throw new Error('Method not implemented.');
+  async findAll(filter?: Partial<QuestionEntity>): Promise<QuestionEntity[]> {
+    return this.prisma.question.findMany();
   }
-  findOne(id: string): Promise<QuestionEntity> {
-    throw new Error('Method not implemented.');
+
+  async findOne(id: string): Promise<QuestionEntity> {
+    return this.prisma.question.findUnique({ where: { id } });
   }
   update(id: string, data: Partial<QuestionEntity>): Promise<QuestionEntity> {
     throw new Error('Method not implemented.');

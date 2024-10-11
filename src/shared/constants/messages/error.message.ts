@@ -7,5 +7,8 @@ export const errorMessage = (_?: string) => {
     emailAdressAlreadyExist: "L'adresse email existe déjà",
     registrationNumber: 'Ce numéro matricule existe déjà',
     classNotFound: "Class id n'existe pas",
+    questionNotFound: "Question id n'existe pas",
+    subjectNotFound: "Subject id n'existe pas",
+    testNotFound: "Test id n'existe pas",
   };
 };

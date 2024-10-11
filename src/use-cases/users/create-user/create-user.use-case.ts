@@ -44,12 +44,13 @@ export class CreateUserUseCase implements UseCase<CreatedUserDto> {
     if (userSelected) {
       throw new ConflictException(errorMessage().emailAdressAlreadyExist);
     }
-    const classSelected = await this.classRepository.findOne(user.classId);
-    const registrationNumberSelected =
-      await this.studentRepository.findByRegisterNumber(
-        user.registrationNumber,
-      );
+
     if (user.role === 'STUDENT') {
+      const classSelected = await this.classRepository.findOne(user.classId);
+      const registrationNumberSelected =
+        await this.studentRepository.findByRegisterNumber(
+          user.registrationNumber,
+        );
       if (registrationNumberSelected)
         throw new ConflictException(errorMessage().registrationNumber);
       if (!classSelected)

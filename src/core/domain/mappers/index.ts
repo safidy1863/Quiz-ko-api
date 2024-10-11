@@ -8,3 +8,4 @@ export * from './tests-class';
 export * from './tests';
 export * from './subjects';
 export * from './questions';
+export * from './subjects-questions';
