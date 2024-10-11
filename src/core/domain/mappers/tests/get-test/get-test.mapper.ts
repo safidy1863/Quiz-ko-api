@@ -17,10 +17,10 @@ export class GetTestMapper extends Mapper<GetTestDto, TestEntity> {
 
   public mapTo(
     data: TestEntity,
-    questions : {
-        subject : SubjectEntity
-        question : QuestionsWithAnswersType
-      }[]
+    questions: {
+      subject: SubjectEntity;
+      question: QuestionsWithAnswersType;
+    }[],
   ): GetTestDto {
     const test = new GetTestDto();
 

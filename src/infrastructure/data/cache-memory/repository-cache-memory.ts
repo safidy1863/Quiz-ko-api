@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Entity, Repository } from '@/core';
 
 export class RepositoryCacheMemory<

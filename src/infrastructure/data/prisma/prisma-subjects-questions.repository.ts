@@ -1,6 +1,6 @@
-import { SubjectEntity, SubjectQuestionEntity, SubjectsQuestionsRepository } from '@/core';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { SubjectQuestionEntity, SubjectsQuestionsRepository } from '@/core';
 import { PrismaService } from './prisma.service';
-import { QuestionsWithAnswersType } from '../../../shared';
 
 export class PrismaSubjectsQuestionsRepository
   implements SubjectsQuestionsRepository
@@ -18,12 +18,12 @@ export class PrismaSubjectsQuestionsRepository
   findOne(id: string): Promise<SubjectQuestionEntity> {
     throw new Error('Method not implemented.');
   }
-  
+
   async findBySubjectId(subjectId: string) {
     return this.prisma.subjectQuestions.findMany({
       where: { subjectId },
       select: {
-        subject : true,
+        subject: true,
         question: {
           select: {
             type: true,

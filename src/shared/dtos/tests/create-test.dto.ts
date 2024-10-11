@@ -13,7 +13,6 @@ import {
 export class CreateTestDto {
   id?: string;
 
-  
   @IsString()
   @MinLength(2, {
     message: 'Le titre du test doit contenir au moins 2 caractères.',
@@ -26,7 +25,6 @@ export class CreateTestDto {
   })
   title: string;
 
-
   @IsNumber()
   @IsPositive()
   @ApiProperty({
@@ -34,14 +32,12 @@ export class CreateTestDto {
   })
   duration: number;
 
-
   @IsOptional()
   @IsBoolean()
   @ApiProperty({
     example: false,
   })
   isActive: boolean;
-
 
   @IsUUID('4', {
     message:

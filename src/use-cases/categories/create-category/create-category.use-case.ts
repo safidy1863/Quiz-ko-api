@@ -15,7 +15,9 @@ export class CreateCategoryUseCase implements UseCase<CreateCategoryDto> {
     this.createdCategoryMapper = new CreatedCategoryMapper();
   }
 
-  public async execute(Category: CreateCategoryDto): Promise<CreatedCategoryDto> {
+  public async execute(
+    Category: CreateCategoryDto,
+  ): Promise<CreatedCategoryDto> {
     const entity = this.createCategoryMapper.mapFrom(Category);
     const createdCategory = await this.repository.create(entity);
     return this.createdCategoryMapper.mapTo(createdCategory);

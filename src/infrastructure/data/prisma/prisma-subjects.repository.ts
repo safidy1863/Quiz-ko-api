@@ -1,4 +1,5 @@
-import { SubjectEntity, SubjectsRepository, TestEntity } from '@/core';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { SubjectEntity, SubjectsRepository } from '@/core';
 import { PrismaService } from './prisma.service';
 
 export class PrismaSubjectsRepository implements SubjectsRepository {

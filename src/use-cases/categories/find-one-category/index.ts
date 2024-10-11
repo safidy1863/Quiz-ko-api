@@ -1,1 +1,1 @@
-export * from './find-one-category.use-case'
+export * from './find-one-category.use-case';

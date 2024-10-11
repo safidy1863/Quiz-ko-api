@@ -1,4 +1,4 @@
 export class CreatedLevelDto {
-    id : string
-    label : string
+  id: string;
+  label: string;
 }

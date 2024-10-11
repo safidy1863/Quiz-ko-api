@@ -1,5 +1,5 @@
-import { AnswerEntity, QuestionEntity } from "../../core";
+import { AnswerEntity, QuestionEntity } from '../../core';
 
-export type QuestionsWithAnswersType = (QuestionEntity & {
+export type QuestionsWithAnswersType = QuestionEntity & {
   answers: AnswerEntity[];
-});
+};

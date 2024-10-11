@@ -3,7 +3,7 @@ import { UserEntity } from '@/core/domain/entities';
 import { CreateUserDto } from '@/shared';
 
 export class CreateUserMapper extends Mapper<CreateUserDto, UserEntity> {
-   public mapFrom(data: CreateUserDto): UserEntity {
+  public mapFrom(data: CreateUserDto): UserEntity {
     const user = new UserEntity();
 
     user.lastName = data.lastName;

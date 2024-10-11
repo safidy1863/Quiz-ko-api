@@ -1,1 +1,1 @@
-export * from './find-one-test.use-case'
+export * from './find-one-test.use-case';

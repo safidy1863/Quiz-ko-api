@@ -50,7 +50,8 @@ export class CreateUserUseCase implements UseCase<CreatedUserDto> {
         user.registrationNumber,
       );
     if (user.role === 'STUDENT') {
-      if (registrationNumberSelected) throw new ConflictException(errorMessage().registrationNumber);
+      if (registrationNumberSelected)
+        throw new ConflictException(errorMessage().registrationNumber);
       if (!classSelected)
         throw new NotFoundException(errorMessage().classNotFound);
     }

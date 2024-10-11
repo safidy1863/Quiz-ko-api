@@ -1,4 +1,4 @@
-import { CreatedQuestionDto } from "../questions";
+import { CreatedQuestionDto } from '../questions';
 
 export class CreatedSubjectDto {
   id: string;

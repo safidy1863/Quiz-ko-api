@@ -1,1 +1,1 @@
-export * from './get-test.mapper'
+export * from './get-test.mapper';

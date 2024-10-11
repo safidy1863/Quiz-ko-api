@@ -8,7 +8,7 @@ export class FindOneLevelUseCase implements UseCase<CreatedLevelDto> {
     this.createdLevelMapper = new CreatedLevelMapper();
   }
 
-  public async execute(id : string): Promise<CreatedLevelDto> {
+  public async execute(id: string): Promise<CreatedLevelDto> {
     const level = await this.repository.findOne(id);
     return this.createdLevelMapper.mapTo(level);
   }

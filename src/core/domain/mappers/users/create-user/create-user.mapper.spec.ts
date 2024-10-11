@@ -37,6 +37,6 @@ describe('CreateUserMapper', () => {
       email,
       password,
     });
-    expect(user).toEqual({ lastName, email, firstName, role});
+    expect(user).toEqual({ lastName, email, firstName, role });
   });
 });

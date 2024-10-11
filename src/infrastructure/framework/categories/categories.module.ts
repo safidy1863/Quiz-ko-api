@@ -19,7 +19,8 @@ import {
     PrismaService,
     {
       provide: CategoriesRepository,
-      useFactory: (prisma: PrismaService) => new PrismaCategoriesRepository(prisma),
+      useFactory: (prisma: PrismaService) =>
+        new PrismaCategoriesRepository(prisma),
       inject: [PrismaService],
     },
     {

@@ -13,7 +13,7 @@ export class CreateStudentMapper extends Mapper<
     student.gender = data.gender;
     student.phone = data.phone;
     student.classId = data.classId;
-    student.userId = data.userId
+    student.userId = data.userId;
 
     return student;
   }
@@ -26,7 +26,7 @@ export class CreateStudentMapper extends Mapper<
     student.gender = data.gender;
     student.phone = data.phone;
     student.classId = data.classId;
-    student.userId = data.userId
+    student.userId = data.userId;
 
     return student;
   }

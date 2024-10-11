@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { TestClassEntity, TestsClassRepository } from '@/core';
 import { PrismaService } from './prisma.service';
 
@@ -10,7 +11,7 @@ export class PrismaTestsClassRepository implements TestsClassRepository {
   findAll(filter?: Partial<TestClassEntity>): Promise<TestClassEntity[]> {
     throw new Error('Method not implemented.');
   }
-  
+
   async findOne(id: string): Promise<TestClassEntity> {
     throw new Error('Method not implemented.');
   }

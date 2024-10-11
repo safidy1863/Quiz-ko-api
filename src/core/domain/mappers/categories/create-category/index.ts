@@ -1,1 +1,1 @@
-export * from './create-category.mapper'
+export * from './create-category.mapper';

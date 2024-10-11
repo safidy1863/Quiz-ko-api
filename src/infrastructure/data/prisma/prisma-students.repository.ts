@@ -1,4 +1,4 @@
-import { StudentEntity, StudentsRepository, UserEntity } from '@/core';
+import { StudentEntity, StudentsRepository } from '@/core';
 import { PrismaService } from './prisma.service';
 
 export class PrismaStudentsRepository implements StudentsRepository {
@@ -16,7 +16,9 @@ export class PrismaStudentsRepository implements StudentsRepository {
     return this.prisma.student.findUnique({ where: { id } });
   }
 
-  async findByRegisterNumber(registrationNumber: string): Promise<StudentEntity> {
+  async findByRegisterNumber(
+    registrationNumber: string,
+  ): Promise<StudentEntity> {
     return this.prisma.student.findFirst({ where: { registrationNumber } });
   }
 

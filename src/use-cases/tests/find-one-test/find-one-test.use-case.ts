@@ -18,7 +18,8 @@ export class FindOneTestUseCase implements UseCase<GetTestDto> {
 
   public async execute(id: string): Promise<GetTestDto> {
     const test = await this.repository.findOne(id);
-    const subjectQuestions = await this.subjectsQuestionsRepository.findBySubjectId(test.subjectId) 
+    const subjectQuestions =
+      await this.subjectsQuestionsRepository.findBySubjectId(test.subjectId);
 
     return this.getTestMapper.mapTo(test, subjectQuestions);
   }
