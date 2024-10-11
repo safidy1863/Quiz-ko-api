@@ -20,6 +20,7 @@ export class FindTestsByClassIdUseCase implements UseCase<GetTestClassDto[]> {
 
   public async execute(classId: string): Promise<GetTestClassDto[]> {
     const testsClass = await this.repository.findByClassId(classId);
+
     const testsClassDto = await Promise.all(
       testsClass.map(async (testClass) => {
         const test = await this.testRepository.findOne(testClass.testId);

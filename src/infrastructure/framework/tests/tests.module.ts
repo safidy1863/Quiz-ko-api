@@ -4,12 +4,14 @@ import {
   PrismaClassRepository,
   PrismaService,
   PrismaSubjectsQuestionsRepository,
+  PrismaSubjectsRepository,
   PrismaTestsClassRepository,
   PrismaTestsRepository,
 } from '@/infrastructure/data/prisma';
 import {
   ClassRepository,
   SubjectsQuestionsRepository,
+  SubjectsRepository,
   TestsClassRepository,
   TestsRepository,
 } from '@/core';
@@ -37,6 +39,12 @@ import {
     {
       provide: ClassRepository,
       useFactory: (prisma: PrismaService) => new PrismaClassRepository(prisma),
+      inject: [PrismaService],
+    },
+    {
+      provide: SubjectsRepository,
+      useFactory: (prisma: PrismaService) =>
+        new PrismaSubjectsRepository(prisma),
       inject: [PrismaService],
     },
     {
@@ -69,9 +77,11 @@ import {
     },
     {
       provide: CreateTestUseCase,
-      useFactory: (repository: TestsRepository) =>
-        new CreateTestUseCase(repository),
-      inject: [TestsRepository],
+      useFactory: (
+        repository: TestsRepository,
+        subjectsRepository: SubjectsRepository,
+      ) => new CreateTestUseCase(repository, subjectsRepository),
+      inject: [TestsRepository, SubjectsRepository],
     },
   ],
 })

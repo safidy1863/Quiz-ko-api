@@ -1,3 +1,4 @@
+export * from './answers';
 export * from './users';
 export * from './levels';
 export * from './categories';
@@ -6,3 +7,5 @@ export * from './subjects';
 export * from './students';
 export * from './tests';
 export * from './tests-class';
+export * from './questions';
+export * from './subjects-questions';

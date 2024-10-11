@@ -1,7 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { CreateAnswerDto } from '../answers';
 import {
-  IsArray,
   IsEnum,
   IsNotEmpty,
   IsNumber,
@@ -9,23 +7,11 @@ import {
   IsString,
   Max,
   MinLength,
-  ValidateNested,
 } from 'class-validator';
 import { QuestionEnum, QuestionType } from '../../enums/question-type.enum';
-import { Type } from 'class-transformer';
 
 export class CreateQuestionDto {
   id?: string;
-
-  @IsNotEmpty()
-  @IsString()
-  @MinLength(2, {
-    message: 'Le libellé de la question doit contenir au moins 2 caractères.',
-  })
-  @ApiProperty({
-    example: 'This is a first question',
-  })
-  label: string;
 
   @IsNotEmpty()
   @IsString()
@@ -69,24 +55,4 @@ export class CreateQuestionDto {
     example: 'SINGLE',
   })
   type: QuestionType;
-
-  @IsArray()
-  @ValidateNested({
-    each: true,
-    message: 'Chaque élément du tableau doit être une réponse valide.',
-  })
-  @Type(() => CreateAnswerDto)
-  @ApiProperty({
-    example: [
-      {
-        label: 'First answer',
-        isCorrect: true,
-      },
-      {
-        label: 'Second answer',
-        isCorrect: false,
-      },
-    ],
-  })
-  answers: CreateAnswerDto[];
 }

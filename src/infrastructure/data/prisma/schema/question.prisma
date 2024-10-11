@@ -9,6 +9,6 @@ model Question {
   description String
   point       Float
   type        QuestionType
-  answers     Answer[]   
+  answers     Answer[]      
   subjects    SubjectQuestions[]
 }

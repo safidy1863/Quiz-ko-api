@@ -7,6 +7,8 @@ import { ConfigModule } from '@nestjs/config';
 import env from '@/shared/constants/env';
 import { TestsModule } from './tests';
 import { SubjectsModule } from './subjects';
+import { AnswersModule } from './answers';
+import { QuestionsModule } from './questions';
 
 @Module({
   imports: [
@@ -18,6 +20,8 @@ import { SubjectsModule } from './subjects';
     CategoriesModule,
     ClassModule,
     SubjectsModule,
+    QuestionsModule,
+    AnswersModule,
     TestsModule,
   ],
 })
