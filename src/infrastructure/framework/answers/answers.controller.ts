@@ -1,6 +1,11 @@
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { CreateAnswerDto } from '@/shared';
+import {
+  CreateAnswerDto,
+  CreateStudentTestAnswerDto,
+  GetUser,
+  UserWithoutPassword,
+} from '@/shared';
 import {
   CreateAnswerUseCase,
   CreateStudentTestAnswerUseCase,
@@ -22,13 +27,14 @@ export class AnswersController {
     return this.createAnswerUseCase.execute(createAnswerDto);
   }
 
-  // @Post('choice')
-  // createTestAnswer(
-  //   @Body() createStudentTestAnswer: CreateStudentTestAnswerDto,
-  // ) {
-  //   return this.createStudentTestAnswerUseCase.execute(
-  //     createStudentTestAnswer,
-  //     '',
-  //   );
-  // }
+  @Post('reply')
+  createTestAnswer(
+    @Body() createStudentTestAnswer: CreateStudentTestAnswerDto,
+    @GetUser() user: UserWithoutPassword,
+  ) {
+    return this.createStudentTestAnswerUseCase.execute(
+      createStudentTestAnswer,
+      user.id,
+    );
+  }
 }

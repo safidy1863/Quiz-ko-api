@@ -6,11 +6,14 @@ export class CreateStudentTestAnswerMapper extends Mapper<
   CreateStudentTestAnswerDto,
   StudentTestAnswerEntity
 > {
-  public mapFrom(data: CreateStudentTestAnswerDto): StudentTestAnswerEntity {
+  public mapFrom(
+    data: CreateStudentTestAnswerDto,
+    studentId: string,
+  ): StudentTestAnswerEntity {
     const studentTestAnswer = new StudentTestAnswerEntity();
 
     studentTestAnswer.testId = data.testId;
-    studentTestAnswer.studentId = data.studentId;
+    studentTestAnswer.studentId = studentId;
     studentTestAnswer.answerId = data.answerId;
 
     return studentTestAnswer;

@@ -27,9 +27,9 @@ export class CreateStudentTestAnswerUseCase implements UseCase<string> {
 
   public async execute(
     studentTestAnswer: CreateStudentTestAnswerDto,
-    studentId: string,
+    userId: string,
   ): Promise<string> {
-    const student = await this.studentsRepository.findOne(studentId);
+    const student = await this.studentsRepository.findByUserId(userId);
 
     if (!student) {
       throw new NotFoundException(errorMessage().studentNotFound);
@@ -49,8 +49,10 @@ export class CreateStudentTestAnswerUseCase implements UseCase<string> {
       throw new NotFoundException(errorMessage().testNotFound);
     }
 
-    const entity =
-      this.createStudentTestAnswerMapper.mapFrom(studentTestAnswer);
+    const entity = this.createStudentTestAnswerMapper.mapFrom(
+      studentTestAnswer,
+      student.id,
+    );
     await this.repository.create(entity);
     return successMessage().reply;
   }
