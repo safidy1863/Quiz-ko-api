@@ -1,15 +1,18 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
-import { CreateUserDto } from '@/shared';
-import { CreateUserUseCase } from '@/use-cases';
+import { Controller, Get, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { FindOneUserUseCase } from '@/use-cases';
+import { AuthGuard } from '../../adapters';
+import { GetUser, UserWithoutPassword } from '@/shared';
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard)
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
-  constructor(private createUserUseCase: CreateUserUseCase) {}
+  constructor(private findOneUserUseCase: FindOneUserUseCase) {}
 
-  @Post()
-  async create(@Body() data: CreateUserDto) {
-    return this.createUserUseCase.execute(data);
+  @Get('me')
+  getMe(@GetUser() user: UserWithoutPassword) {
+    return this.findOneUserUseCase.execute(user.id);
   }
 }

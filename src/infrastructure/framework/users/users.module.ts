@@ -15,7 +15,7 @@ import {
   StudentsRepository,
   UsersRepository,
 } from '@/core';
-import { CreateUserUseCase } from '@/use-cases';
+import { FindOneUserUseCase } from '@/use-cases';
 
 @Module({
   controllers: [UsersController],
@@ -49,7 +49,7 @@ import { CreateUserUseCase } from '@/use-cases';
       inject: [PrismaService],
     },
     {
-      provide: CreateUserUseCase,
+      provide: FindOneUserUseCase,
       useFactory: (
         repository: UsersRepository,
         studentRepository: StudentsRepository,
@@ -57,7 +57,7 @@ import { CreateUserUseCase } from '@/use-cases';
         categoryRepository: CategoriesRepository,
         levelRepository: LevelsRepository,
       ) =>
-        new CreateUserUseCase(
+        new FindOneUserUseCase(
           repository,
           studentRepository,
           classRepository,

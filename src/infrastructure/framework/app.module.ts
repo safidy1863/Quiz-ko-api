@@ -9,6 +9,7 @@ import { TestsModule } from './tests';
 import { SubjectsModule } from './subjects';
 import { AnswersModule } from './answers';
 import { QuestionsModule } from './questions';
+import { UsersModule } from './users';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { QuestionsModule } from './questions';
       load: [env],
     }),
     AuthModule,
+    UsersModule,
     LevelsModule,
     CategoriesModule,
     ClassModule,
