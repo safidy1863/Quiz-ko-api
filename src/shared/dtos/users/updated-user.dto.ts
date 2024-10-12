@@ -1,7 +1,7 @@
 import { Gender, UserRole } from '../../enums';
 import { CreatedClassDto } from '../class';
 
-export class CreatedUserDto {
+export class UpdatedUserDto {
   id: string;
   lastName: string;
   firstName?: string;

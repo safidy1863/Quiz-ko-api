@@ -15,7 +15,7 @@ import {
   StudentsRepository,
   UsersRepository,
 } from '@/core';
-import { FindOneUserUseCase } from '@/use-cases';
+import { FindOneUserUseCase, UpdateUserUseCase } from '@/use-cases';
 
 @Module({
   controllers: [UsersController],
@@ -58,6 +58,30 @@ import { FindOneUserUseCase } from '@/use-cases';
         levelRepository: LevelsRepository,
       ) =>
         new FindOneUserUseCase(
+          repository,
+          studentRepository,
+          classRepository,
+          categoryRepository,
+          levelRepository,
+        ),
+      inject: [
+        UsersRepository,
+        StudentsRepository,
+        ClassRepository,
+        CategoriesRepository,
+        LevelsRepository,
+      ],
+    },
+    {
+      provide: UpdateUserUseCase,
+      useFactory: (
+        repository: UsersRepository,
+        studentRepository: StudentsRepository,
+        classRepository: ClassRepository,
+        categoryRepository: CategoriesRepository,
+        levelRepository: LevelsRepository,
+      ) =>
+        new UpdateUserUseCase(
           repository,
           studentRepository,
           classRepository,
