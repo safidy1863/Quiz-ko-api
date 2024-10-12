@@ -5,4 +5,6 @@ export abstract class StudentsRepository extends Repository<StudentEntity> {
   abstract findByRegisterNumber(
     registrationNumber: string,
   ): Promise<StudentEntity>;
+
+  abstract findByUserId(userId: string): Promise<StudentEntity>;
 }

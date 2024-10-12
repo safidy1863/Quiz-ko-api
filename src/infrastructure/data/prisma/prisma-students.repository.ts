@@ -22,6 +22,10 @@ export class PrismaStudentsRepository implements StudentsRepository {
     return this.prisma.student.findFirst({ where: { registrationNumber } });
   }
 
+  async findByUserId(userId: string): Promise<StudentEntity> {
+    return this.prisma.student.findFirst({ where: { userId } });
+  }
+
   async update(
     id: string,
     data: Partial<StudentEntity>,

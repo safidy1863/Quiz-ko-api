@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
         secret: env().jwt.secret,
       });
 
-      request['email'] = payload;
+      request['user'] = payload;
     } catch {
       throw new UnauthorizedException();
     }

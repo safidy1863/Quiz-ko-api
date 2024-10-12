@@ -4,7 +4,13 @@ import {
   UserEntity,
   UsersRepository,
 } from '@/core';
-import { errorMessage, isMatch, LoggeddUserDto, LoginUserDto } from '@/shared';
+import {
+  errorMessage,
+  isMatch,
+  LoggeddUserDto,
+  LoginUserDto,
+  UserWithoutPassword,
+} from '@/shared';
 import { JwtService } from '@nestjs/jwt';
 import { NotFoundException, UnauthorizedException } from '@nestjs/common';
 
@@ -36,9 +42,12 @@ export class LoginUserUseCase implements UseCase<LoggeddUserDto> {
       throw new UnauthorizedException(errorMessage().errorPassword);
     }
 
-    const payload = {
-      sub: userSelected.id,
-      identifiant: userSelected.email,
+    const payload: UserWithoutPassword = {
+      id: userSelected.id,
+      lastName: userSelected.lastName,
+      firstName: userSelected.firstName,
+      role: userSelected.role,
+      email: userSelected.email,
     };
 
     return {
