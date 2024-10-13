@@ -49,7 +49,7 @@ export class UpdateUserUseCase implements UseCase<UpdatedUserDto> {
       throw new NotFoundException(errorMessage().userNotFound);
     }
 
-    if (userSelected.email !== user.email) {
+    if (user.email) {
       const userSelectedByEmail = await this.repository.findByEmail(user.email);
       if (userSelectedByEmail) {
         throw new ConflictException(errorMessage().emailAdressAlreadyExist);
@@ -57,19 +57,26 @@ export class UpdateUserUseCase implements UseCase<UpdatedUserDto> {
     }
 
     if (userSelected.role === 'STUDENT') {
-      const studentSelected = await this.studentRepository.findByUserId(userId);
-      const classSelected = await this.classRepository.findOne(user.classId);
-      const registrationNumberSelected =
-        await this.studentRepository.findByRegisterNumber(
-          user.registrationNumber,
-        );
-      if (
-        studentSelected.registrationNumber !== user.registrationNumber &&
-        registrationNumberSelected
-      )
-        throw new ConflictException(errorMessage().registrationNumber);
-      if (!classSelected)
-        throw new NotFoundException(errorMessage().classNotFound);
+      if (user.registrationNumber) {
+        const studentSelected =
+          await this.studentRepository.findByUserId(userId);
+        const registrationNumberSelected =
+          await this.studentRepository.findByRegisterNumber(
+            user.registrationNumber,
+          );
+        if (
+          studentSelected.registrationNumber !== user.registrationNumber &&
+          registrationNumberSelected
+        )
+          throw new ConflictException(errorMessage().registrationNumber);
+      }
+
+      if (user.classId) {
+        const classSelected = await this.classRepository.findOne(user.classId);
+
+        if (!classSelected)
+          throw new NotFoundException(errorMessage().classNotFound);
+      }
     }
 
     // Operation
@@ -80,7 +87,9 @@ export class UpdateUserUseCase implements UseCase<UpdatedUserDto> {
       const student = await this.studentRepository.findByUserId(userId);
       await this.studentRepository.update(student.id, user);
 
-      const classRoom = await this.classRepository.findOne(user.classId);
+      const classRoom = await this.classRepository.findOne(
+        user.classId ?? student.classId,
+      );
       const category = await this.categoryRepository.findOne(
         classRoom.categoryId,
       );
