@@ -1,8 +1,17 @@
 import { Body, Controller, Get, Patch, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { FindOneUserUseCase, UpdateUserUseCase } from '@/use-cases';
+import {
+  FindOneUserUseCase,
+  UpdateUserPasswordUseCase,
+  UpdateUserUseCase,
+} from '@/use-cases';
 import { AuthGuard } from '../../adapters';
-import { GetUser, UpdateUserDto, UserWithoutPassword } from '@/shared';
+import {
+  GetUser,
+  UpdateUserDto,
+  UpdateUserPasswordDto,
+  UserWithoutPassword,
+} from '@/shared';
 
 @ApiBearerAuth()
 @UseGuards(AuthGuard)
@@ -10,8 +19,9 @@ import { GetUser, UpdateUserDto, UserWithoutPassword } from '@/shared';
 @Controller('users')
 export class UsersController {
   constructor(
-    private findOneUserUseCase: FindOneUserUseCase,
+    private readonly findOneUserUseCase: FindOneUserUseCase,
     private readonly updateUserUseCase: UpdateUserUseCase,
+    private readonly updateUserPasswordUseCase: UpdateUserPasswordUseCase,
   ) {}
 
   @Get('me')
@@ -25,5 +35,16 @@ export class UsersController {
     @Body() updateUserDto: UpdateUserDto,
   ) {
     return this.updateUserUseCase.execute(user.id, updateUserDto);
+  }
+
+  @Patch('password')
+  updatePassword(
+    @GetUser() user: UserWithoutPassword,
+    @Body() updateUserPasswordDto: UpdateUserPasswordDto,
+  ) {
+    return this.updateUserPasswordUseCase.execute(
+      user.id,
+      updateUserPasswordDto,
+    );
   }
 }
