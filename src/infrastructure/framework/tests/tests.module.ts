@@ -1,21 +1,28 @@
 import { Module } from '@nestjs/common';
 import { TestsController } from './tests.controller';
 import {
+  PrismaAnswersRepository,
   PrismaClassRepository,
   PrismaService,
+  PrismaStudentsRepository,
+  PrismaStudentTestAnswerRepository,
   PrismaSubjectsQuestionsRepository,
   PrismaSubjectsRepository,
   PrismaTestsClassRepository,
   PrismaTestsRepository,
 } from '@/infrastructure/data/prisma';
 import {
+  AnswersRepository,
   ClassRepository,
+  StudentsRepository,
+  StudentTestAnswerRepository,
   SubjectsQuestionsRepository,
   SubjectsRepository,
   TestsClassRepository,
   TestsRepository,
 } from '@/core';
 import {
+  CreateStudentTestAnswerUseCase,
   CreateTestUseCase,
   FindOneTestUseCase,
   FindTestsByClassIdUseCase,
@@ -42,15 +49,33 @@ import {
       inject: [PrismaService],
     },
     {
+      provide: StudentsRepository,
+      useFactory: (prisma: PrismaService) =>
+        new PrismaStudentsRepository(prisma),
+      inject: [PrismaService],
+    },
+    {
       provide: SubjectsRepository,
       useFactory: (prisma: PrismaService) =>
         new PrismaSubjectsRepository(prisma),
       inject: [PrismaService],
     },
     {
+      provide: AnswersRepository,
+      useFactory: (prisma: PrismaService) =>
+        new PrismaAnswersRepository(prisma),
+      inject: [PrismaService],
+    },
+    {
       provide: SubjectsQuestionsRepository,
       useFactory: (prisma: PrismaService) =>
         new PrismaSubjectsQuestionsRepository(prisma),
+      inject: [PrismaService],
+    },
+    {
+      provide: StudentTestAnswerRepository,
+      useFactory: (prisma: PrismaService) =>
+        new PrismaStudentTestAnswerRepository(prisma),
       inject: [PrismaService],
     },
     {
@@ -82,6 +107,27 @@ import {
         subjectsRepository: SubjectsRepository,
       ) => new CreateTestUseCase(repository, subjectsRepository),
       inject: [TestsRepository, SubjectsRepository],
+    },
+    {
+      provide: CreateStudentTestAnswerUseCase,
+      useFactory: (
+        repository: StudentTestAnswerRepository,
+        testRepository: TestsRepository,
+        studentsRepository: StudentsRepository,
+        answersRepository: AnswersRepository,
+      ) =>
+        new CreateStudentTestAnswerUseCase(
+          repository,
+          testRepository,
+          studentsRepository,
+          answersRepository,
+        ),
+      inject: [
+        StudentTestAnswerRepository,
+        TestsRepository,
+        StudentsRepository,
+        AnswersRepository,
+      ],
     },
   ],
 })

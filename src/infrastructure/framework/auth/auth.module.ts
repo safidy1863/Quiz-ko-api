@@ -88,8 +88,26 @@ import env from '@/shared/constants/env';
         repository: UsersRepository,
         studentRepository: StudentsRepository,
         jwtService: JwtService,
-      ) => new LoginUserUseCase(repository, studentRepository, jwtService),
-      inject: [UsersRepository, StudentsRepository, JwtService],
+        classRepository: ClassRepository,
+        categoryRepository: CategoriesRepository,
+        levelRepository: LevelsRepository,
+      ) =>
+        new LoginUserUseCase(
+          repository,
+          studentRepository,
+          jwtService,
+          classRepository,
+          categoryRepository,
+          levelRepository,
+        ),
+      inject: [
+        UsersRepository,
+        StudentsRepository,
+        JwtService,
+        ClassRepository,
+        CategoriesRepository,
+        LevelsRepository,
+      ],
     },
   ],
 })
