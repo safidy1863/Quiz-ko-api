@@ -46,7 +46,7 @@ export class CreateStudentTestAnswerUseCase implements UseCase<string> {
     );
 
     if (!answer) {
-      throw new NotFoundException(errorMessage().testNotFound);
+      throw new NotFoundException(errorMessage().answerNotFound);
     }
 
     const entity = this.createStudentTestAnswerMapper.mapFrom(
