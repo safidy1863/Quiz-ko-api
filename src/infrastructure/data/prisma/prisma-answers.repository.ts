@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { AnswersRepository, AnswerEntity } from '@/core';
 import { PrismaService } from './prisma.service';
 
