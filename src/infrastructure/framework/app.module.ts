@@ -10,6 +10,7 @@ import { SubjectsModule } from './subjects';
 import { AnswersModule } from './answers';
 import { QuestionsModule } from './questions';
 import { UsersModule } from './users';
+import { ResultsModule } from './results';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { UsersModule } from './users';
     QuestionsModule,
     AnswersModule,
     TestsModule,
+    ResultsModule,
   ],
 })
 export class AppModule {}

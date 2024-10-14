@@ -1,4 +1,6 @@
 import {
+  CreateStudentTestAnswerUseCase,
+  CreateTestsClassUseCase,
   CreateTestUseCase,
   FindOneTestUseCase,
   FindTestsByClassIdUseCase,
@@ -6,7 +8,13 @@ import {
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiParam, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@/infrastructure/adapters';
-import { CreateTestDto } from '@/shared';
+import {
+  CreateStudentTestAnswerDto,
+  CreateTestClassDto,
+  CreateTestDto,
+  GetUser,
+  UserWithoutPassword,
+} from '@/shared';
 
 @ApiBearerAuth()
 @UseGuards(AuthGuard)
@@ -17,6 +25,8 @@ export class TestsController {
     private readonly findTestsByClassIdUseCase: FindTestsByClassIdUseCase,
     private readonly findOneTest: FindOneTestUseCase,
     private readonly createTestUseCase: CreateTestUseCase,
+    private readonly createStudentTestAnswerUseCase: CreateStudentTestAnswerUseCase,
+    private readonly createTestClassUseCase: CreateTestsClassUseCase,
   ) {}
 
   @ApiParam({ name: 'id', type: 'string' })
@@ -34,5 +44,28 @@ export class TestsController {
   @Post()
   create(@Body() createTestDto: CreateTestDto) {
     return this.createTestUseCase.execute(createTestDto);
+  }
+
+  @ApiParam({ name: 'testId', type: 'string' })
+  @Post('assign/:testId')
+  createSubjectQuestion(
+    @Param('testId') testId: string,
+    @Body() createTestClassDto: CreateTestClassDto,
+  ) {
+    return this.createTestClassUseCase.execute({
+      testId,
+      classId: createTestClassDto.classId,
+    });
+  }
+
+  @Post('reply')
+  createTestAnswer(
+    @GetUser() user: UserWithoutPassword,
+    @Body() createStudentTestAnswer: CreateStudentTestAnswerDto,
+  ) {
+    return this.createStudentTestAnswerUseCase.execute(
+      createStudentTestAnswer,
+      user.id,
+    );
   }
 }

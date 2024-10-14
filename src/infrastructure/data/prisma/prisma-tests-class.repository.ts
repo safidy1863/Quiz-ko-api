@@ -5,9 +5,10 @@ import { PrismaService } from './prisma.service';
 export class PrismaTestsClassRepository implements TestsClassRepository {
   constructor(private prisma: PrismaService) {}
 
-  create(data: TestClassEntity): Promise<TestClassEntity> {
-    throw new Error('Method not implemented.');
+  async create(data: TestClassEntity): Promise<TestClassEntity> {
+    return this.prisma.testsClass.create({ data });
   }
+
   findAll(filter?: Partial<TestClassEntity>): Promise<TestClassEntity[]> {
     throw new Error('Method not implemented.');
   }

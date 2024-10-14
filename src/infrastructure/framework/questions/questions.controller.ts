@@ -30,7 +30,7 @@ export class QuestionsController {
   }
 
   @ApiParam({ name: 'questionId', type: 'string' })
-  @Post('asign/:questionId')
+  @Post('assign/:questionId')
   createSubjectQuestion(
     @Param('questionId') questionId: string,
     @Body() createQuestionDto: CreateSubjectQuestionDto,

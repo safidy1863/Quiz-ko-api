@@ -24,6 +24,7 @@ import { CreateAnswerUseCase } from '@/use-cases';
         new PrismaQuestionsRepository(prisma),
       inject: [PrismaService],
     },
+
     {
       provide: CreateAnswerUseCase,
       useFactory: (
