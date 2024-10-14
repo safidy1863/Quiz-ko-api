@@ -23,6 +23,7 @@ import {
 } from '@/core';
 import {
   CreateStudentTestAnswerUseCase,
+  CreateTestsClassUseCase,
   CreateTestUseCase,
   FindOneTestUseCase,
   FindTestsByClassIdUseCase,
@@ -128,6 +129,20 @@ import {
         StudentsRepository,
         AnswersRepository,
       ],
+    },
+    {
+      provide: CreateTestsClassUseCase,
+      useFactory: (
+        repository: TestsClassRepository,
+        testRepository: TestsRepository,
+        classRespository: ClassRepository,
+      ) =>
+        new CreateTestsClassUseCase(
+          repository,
+          testRepository,
+          classRespository,
+        ),
+      inject: [TestsClassRepository, TestsRepository, ClassRepository],
     },
   ],
 })
