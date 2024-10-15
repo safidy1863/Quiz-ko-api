@@ -85,7 +85,10 @@ export class UpdateUserUseCase implements UseCase<UpdatedUserDto> {
 
     if (userSelected.role === 'STUDENT') {
       const student = await this.studentRepository.findByUserId(userId);
-      await this.studentRepository.update(student.id, user);
+      await this.studentRepository.update(
+        student.id,
+        this.updateStudentMapper.mapFrom({ ...student, ...user }),
+      );
 
       const classRoom = await this.classRepository.findOne(
         user.classId ?? student.classId,

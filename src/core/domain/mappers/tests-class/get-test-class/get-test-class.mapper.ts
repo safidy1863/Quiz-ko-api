@@ -1,5 +1,5 @@
 import { Mapper } from '@/core/base';
-import { GetTestClassDto } from '@/shared';
+import { GetTestClassDto, StatusQuestion } from '@/shared';
 import {
   ClassEntity,
   TestClassEntity,
@@ -23,11 +23,15 @@ export class GetTestClassMapper extends Mapper<
     _: TestClassEntity,
     classRoom: ClassEntity,
     test: TestEntity,
+    questionNumber?: number,
+    status?: StatusQuestion,
   ): GetTestClassDto {
     const testClass = new GetTestClassDto();
 
     testClass.class = classRoom;
     testClass.test = test;
+    testClass.questionNumber = questionNumber ?? 0;
+    if (status) testClass.status = status;
 
     return testClass;
   }

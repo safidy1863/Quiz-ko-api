@@ -4,7 +4,8 @@ import {
   TestsRepository,
   UseCase,
 } from '@/core';
-import { GetTestDto } from '@/shared';
+import { errorMessage, GetTestDto } from '@/shared';
+import { NotFoundException } from '@nestjs/common';
 
 export class FindTestsByUserIdUseCase implements UseCase<GetTestDto> {
   private getTestMapper: GetTestMapper;
@@ -18,6 +19,11 @@ export class FindTestsByUserIdUseCase implements UseCase<GetTestDto> {
 
   public async execute(id: string): Promise<GetTestDto> {
     const test = await this.repository.findOne(id);
+
+    if (!test) {
+      throw new NotFoundException(errorMessage().testNotFound);
+    }
+
     const subjectQuestions =
       await this.subjectsQuestionsRepository.findBySubjectId(test.subjectId);
 

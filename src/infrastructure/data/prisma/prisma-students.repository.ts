@@ -30,6 +30,8 @@ export class PrismaStudentsRepository implements StudentsRepository {
     id: string,
     data: Partial<StudentEntity>,
   ): Promise<StudentEntity> {
+    console.log(data);
+
     return this.prisma.student.update({ where: { id }, data });
   }
 

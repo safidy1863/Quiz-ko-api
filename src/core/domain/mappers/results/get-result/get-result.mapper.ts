@@ -14,10 +14,16 @@ export class GetResultMapper extends Mapper<GetResultsDto, ResultEntity> {
     score: number,
   ): GetResultsDto {
     const result = new GetResultsDto();
+    // TODO : refactor
+    const hour = test.duration.getHours();
+    const minute = test.duration.getMinutes();
 
     result.title = test.title;
-    result.duration = test.duration;
+    result.duration = `${hour}:${minute}`;
     result.score = score;
+    result.trueAnswer = 0;
+    result.wrongAnswer = 2;
+    result.questionNumber = 0;
 
     return result;
   }
