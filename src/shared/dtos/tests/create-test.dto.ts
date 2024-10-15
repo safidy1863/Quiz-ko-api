@@ -2,9 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   IsBoolean,
   IsNotEmpty,
-  IsNumber,
   IsOptional,
-  IsPositive,
   IsString,
   IsUUID,
   MinLength,
@@ -25,12 +23,15 @@ export class CreateTestDto {
   })
   title: string;
 
-  @IsNumber()
-  @IsPositive()
-  @ApiProperty({
-    example: 20,
+  // TODO : test regex time
+  @IsString()
+  @MinLength(2, {
+    message: 'La durée doit contenir au moins 2 caractères.',
   })
-  duration: number;
+  @IsNotEmpty({
+    message: '01:20',
+  })
+  duration: string;
 
   @IsOptional()
   @IsBoolean()

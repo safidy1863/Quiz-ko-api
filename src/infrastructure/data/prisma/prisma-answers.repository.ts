@@ -14,6 +14,12 @@ export class PrismaAnswersRepository implements AnswersRepository {
   async findOne(id: string): Promise<AnswerEntity> {
     return this.prisma.answer.findUnique({ where: { id } });
   }
+
+  async findOpenAnswer(openAnswer: string): Promise<AnswerEntity> {
+    // TODO : IA Intégration
+    return this.prisma.answer.findFirst({ where: { label: openAnswer } });
+  }
+
   update(id: string, data: Partial<AnswerEntity>): Promise<AnswerEntity> {
     throw new Error('Method not implemented.');
   }

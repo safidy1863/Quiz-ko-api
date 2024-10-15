@@ -1,47 +1,65 @@
 import {
-  PrismaAnswersRepository,
+  PrismaResultsRepository,
   PrismaService,
-  PrismaSubjectsQuestionsRepository,
+  PrismaStudentsRepository,
   PrismaTestsRepository,
 } from '@/infrastructure/data/prisma';
 import { ResultsController } from './results.controller';
-import {
-  AnswersRepository,
-  SubjectsQuestionsRepository,
-  TestsRepository,
-} from '@/core';
+import { ResultsRepository, StudentsRepository, TestsRepository } from '@/core';
 import { Module } from '@nestjs/common';
-import { FindTestsByUserIdUseCase } from '@/use-cases';
+import {
+  FindResultByStudentIdAndTestIdUseCase,
+  FindResultByStudentIdUseCase,
+} from '@/use-cases';
 
 @Module({
   controllers: [ResultsController],
   providers: [
     PrismaService,
     {
-      provide: AnswersRepository,
-      useFactory: (prisma: PrismaService) =>
-        new PrismaAnswersRepository(prisma),
-      inject: [PrismaService],
-    },
-    {
       provide: TestsRepository,
       useFactory: (prisma: PrismaService) => new PrismaTestsRepository(prisma),
       inject: [PrismaService],
     },
     {
-      provide: SubjectsQuestionsRepository,
+      provide: ResultsRepository,
       useFactory: (prisma: PrismaService) =>
-        new PrismaSubjectsQuestionsRepository(prisma),
+        new PrismaResultsRepository(prisma),
       inject: [PrismaService],
     },
     {
-      provide: FindTestsByUserIdUseCase,
+      provide: StudentsRepository,
+      useFactory: (prisma: PrismaService) =>
+        new PrismaStudentsRepository(prisma),
+      inject: [PrismaService],
+    },
+    {
+      provide: FindResultByStudentIdUseCase,
       useFactory: (
-        repository: TestsRepository,
-        subjectsQuestionsRepository: SubjectsQuestionsRepository,
+        repository: ResultsRepository,
+        studentsRepository: StudentsRepository,
+        testsRepository: TestsRepository,
       ) =>
-        new FindTestsByUserIdUseCase(repository, subjectsQuestionsRepository),
-      inject: [TestsRepository, SubjectsQuestionsRepository],
+        new FindResultByStudentIdUseCase(
+          repository,
+          studentsRepository,
+          testsRepository,
+        ),
+      inject: [ResultsRepository, StudentsRepository, TestsRepository],
+    },
+    {
+      provide: FindResultByStudentIdAndTestIdUseCase,
+      useFactory: (
+        repository: ResultsRepository,
+        studentsRepository: StudentsRepository,
+        testsRepository: TestsRepository,
+      ) =>
+        new FindResultByStudentIdAndTestIdUseCase(
+          repository,
+          studentsRepository,
+          testsRepository,
+        ),
+      inject: [ResultsRepository, StudentsRepository, TestsRepository],
     },
   ],
 })

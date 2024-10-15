@@ -1,9 +1,11 @@
 model Result {
     id                  String         @id                  @default(uuid())
     interimScore        Int
-    score               Int
+    score               Int?
     testId              String
     test                Test           @relation(fields: [testId], references: [id])
     studentId           String
     student             Student        @relation(fields: [studentId], references: [id])
+
+    @@unique([testId, studentId])
 }

@@ -24,7 +24,13 @@ docker rm -f quiz-ko-api-db-1
 docker compose -f docker-compose.yaml up -d
 ```
 
-- Laucnh our database.
+- Insert our first data :
+
+```
+cat ./data.sql | docker exec -i quiz-ko-api-db-1 psql -U quiz-ko -d quiz-ko
+```
+
+- Launch our database.
 
 ```
 docker exec -ti quiz-ko-api-db-1 psql -U quiz-ko -d quiz-ko

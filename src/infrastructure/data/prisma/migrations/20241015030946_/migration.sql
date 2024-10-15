@@ -28,7 +28,7 @@ CREATE TABLE "Category" (
 -- CreateTable
 CREATE TABLE "Class" (
     "id" TEXT NOT NULL,
-    "group" VARCHAR(10) NOT NULL,
+    "group" VARCHAR(10),
     "levelId" TEXT NOT NULL,
     "categoryId" TEXT NOT NULL,
 
@@ -58,7 +58,7 @@ CREATE TABLE "Question" (
 CREATE TABLE "Result" (
     "id" TEXT NOT NULL,
     "interimScore" INTEGER NOT NULL,
-    "score" INTEGER NOT NULL,
+    "score" INTEGER,
     "testId" TEXT NOT NULL,
     "studentId" TEXT NOT NULL,
 
@@ -107,7 +107,7 @@ CREATE TABLE "SubjectQuestions" (
 CREATE TABLE "Test" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
-    "duration" INTEGER NOT NULL,
+    "duration" TIME NOT NULL,
     "isActive" BOOLEAN DEFAULT true,
     "subjectId" TEXT NOT NULL,
 
@@ -133,6 +133,9 @@ CREATE TABLE "User" (
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Result_testId_studentId_key" ON "Result"("testId", "studentId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Student_registrationNumber_key" ON "Student"("registrationNumber");
