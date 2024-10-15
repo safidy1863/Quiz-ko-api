@@ -2,6 +2,7 @@ import { AnswerEntity, QuestionEntity, UserEntity } from '../../core';
 
 export type QuestionsWithAnswersType = QuestionEntity & {
   answers: AnswerEntity[];
+  answered?: boolean;
 };
 
 export type UserWithoutPassword = Omit<UserEntity, 'password'>;

@@ -21,6 +21,9 @@ export class GetResultMapper extends Mapper<GetResultsDto, ResultEntity> {
     result.title = test.title;
     result.duration = `${hour}:${minute}`;
     result.score = score;
+    result.trueAnswer = 0;
+    result.wrongAnswer = 2;
+    result.questionNumber = 0;
 
     return result;
   }

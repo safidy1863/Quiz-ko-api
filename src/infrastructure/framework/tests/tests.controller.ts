@@ -40,8 +40,8 @@ export class TestsController {
 
   @ApiParam({ name: 'id', type: 'string' })
   @Get(':id')
-  find(@Param('id') id: string) {
-    return this.findOneTest.execute(id);
+  find(@GetUser() user: UserWithoutPassword, @Param('id') id: string) {
+    return this.findOneTest.execute(id, user.id);
   }
 
   @ApiParam({ name: 'classId', type: 'string' })

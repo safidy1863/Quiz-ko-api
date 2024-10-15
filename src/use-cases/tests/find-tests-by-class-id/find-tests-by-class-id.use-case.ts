@@ -29,7 +29,6 @@ export class FindTestsByClassIdUseCase implements UseCase<GetTestClassDto[]> {
     userId: string,
   ): Promise<GetTestClassDto[]> {
     const testsClass = await this.repository.findByClassId(classId);
-    console.log(testsClass);
 
     const student = await this.studentsRepository.findByUserId(userId);
 

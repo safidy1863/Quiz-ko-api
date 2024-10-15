@@ -4,4 +4,7 @@ export class GetResultsDto {
   isActive: boolean;
   subjectId: string;
   score: number;
+  questionNumber?: number;
+  trueAnswer?: number;
+  wrongAnswer?: number;
 }

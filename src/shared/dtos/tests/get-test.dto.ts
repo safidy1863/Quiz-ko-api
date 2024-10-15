@@ -1,5 +1,5 @@
 import { SubjectEntity } from '@/core';
-import { QuestionsWithAnswersType } from '@/shared';
+import { QuestionsWithAnswersType, StatusQuestion } from '@/shared';
 
 export class GetTestDto {
   id: string;
@@ -11,4 +11,8 @@ export class GetTestDto {
     subject: SubjectEntity;
     question: QuestionsWithAnswersType;
   }[];
+  status?: StatusQuestion;
+  questionNumber?: number;
+  trueAnswer?: number;
+  wrongAnswer?: number;
 }

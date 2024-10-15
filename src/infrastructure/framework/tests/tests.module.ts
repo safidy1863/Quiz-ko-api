@@ -127,8 +127,21 @@ import {
       useFactory: (
         repository: TestsRepository,
         subjectsQuestionsRepository: SubjectsQuestionsRepository,
-      ) => new FindOneTestUseCase(repository, subjectsQuestionsRepository),
-      inject: [TestsRepository, SubjectsQuestionsRepository],
+        studentsRepository: StudentsRepository,
+        studentsTestsAnswersRepository: StudentTestAnswerRepository,
+      ) =>
+        new FindOneTestUseCase(
+          repository,
+          subjectsQuestionsRepository,
+          studentsRepository,
+          studentsTestsAnswersRepository,
+        ),
+      inject: [
+        TestsRepository,
+        SubjectsQuestionsRepository,
+        StudentsRepository,
+        StudentTestAnswerRepository,
+      ],
     },
     {
       provide: CreateTestUseCase,
