@@ -1,6 +1,6 @@
 model Class {
     id          String         @id                  @default(uuid())
-    group       String         @db.VarChar(10)
+    group       String?         @db.VarChar(10)
     levelId     String
     level       Level          @relation(fields: [levelId],references: [id])
     categoryId  String

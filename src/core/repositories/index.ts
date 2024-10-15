@@ -10,3 +10,4 @@ export * from './tests.repository';
 export * from './tests-class.repository';
 export * from './subjects-questions.repository';
 export * from './students-test-answer.repository';
+export * from './results.repository';

@@ -1,10 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, IsUUID, MinLength } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsUUID,
+  MinLength,
+} from 'class-validator';
 
 export class CreateClassDto {
   id?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   @MinLength(2, {
     message: 'Le groupe du niveau doit contenir au moins 2 caractères.',

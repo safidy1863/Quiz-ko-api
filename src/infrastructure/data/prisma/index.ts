@@ -11,3 +11,4 @@ export * from './prisma-subjects-questions.repository';
 export * from './prisma-answers.repository';
 export * from './prisma-questions.repository';
 export * from './prisma-student-test-answer.repository';
+export * from './prisma-results.repository';

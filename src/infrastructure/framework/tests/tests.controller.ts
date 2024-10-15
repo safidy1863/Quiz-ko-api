@@ -5,7 +5,16 @@ import {
   FindOneTestUseCase,
   FindTestsByClassIdUseCase,
 } from '@/use-cases';
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseUUIDPipe,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiBearerAuth, ApiParam, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@/infrastructure/adapters';
 import {
@@ -61,10 +70,15 @@ export class TestsController {
   @Post('reply')
   createTestAnswer(
     @GetUser() user: UserWithoutPassword,
+    @Query('testId', ParseUUIDPipe)
+    testId: string,
     @Body() createStudentTestAnswer: CreateStudentTestAnswerDto,
   ) {
     return this.createStudentTestAnswerUseCase.execute(
-      createStudentTestAnswer,
+      {
+        ...createStudentTestAnswer,
+        testId,
+      },
       user.id,
     );
   }

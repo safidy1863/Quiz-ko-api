@@ -5,6 +5,7 @@ import {
   StudentsRepository,
   AnswersRepository,
   CreateStudentTestAnswerMapper,
+  AnswerEntity,
 } from '@/core';
 import {
   CreateStudentTestAnswerDto,
@@ -41,19 +42,53 @@ export class CreateStudentTestAnswerUseCase implements UseCase<string> {
       throw new NotFoundException(errorMessage().testNotFound);
     }
 
-    const answer = await this.answersRepository.findOne(
-      studentTestAnswer.answerId,
-    );
+    // TODO : refactoring
 
-    if (!answer) {
-      throw new NotFoundException(errorMessage().answerNotFound);
+    if (Array.isArray(studentTestAnswer.answerId)) {
+      for (const answerId of studentTestAnswer.answerId) {
+        const answer = await this.answersRepository.findOne(answerId);
+
+        if (!answer) {
+          throw new NotFoundException(errorMessage().answerNotFound);
+        }
+
+        const entity = this.createStudentTestAnswerMapper.mapFrom(
+          {
+            testId: studentTestAnswer.testId,
+            answerId,
+            openAnswer: studentTestAnswer.openAnswer,
+          },
+          student.id,
+        );
+        await this.repository.create(entity);
+      }
+      // For openAnswer ans SINGLE
+    } else {
+      let answer: AnswerEntity;
+      if (studentTestAnswer.answerId)
+        answer = await this.answersRepository.findOne(
+          studentTestAnswer.answerId,
+        );
+      if (!answer && studentTestAnswer.openAnswer)
+        answer = await this.answersRepository.findOpenAnswer(
+          studentTestAnswer.openAnswer,
+        );
+
+      if (!answer) {
+        throw new NotFoundException(errorMessage().answerNotFound);
+      }
+
+      const entity = this.createStudentTestAnswerMapper.mapFrom(
+        {
+          testId: studentTestAnswer.testId,
+          answerId: answer.id,
+          openAnswer: studentTestAnswer.openAnswer,
+        },
+        student.id,
+      );
+      await this.repository.create(entity);
     }
 
-    const entity = this.createStudentTestAnswerMapper.mapFrom(
-      studentTestAnswer,
-      student.id,
-    );
-    await this.repository.create(entity);
     return successMessage().reply;
   }
 }

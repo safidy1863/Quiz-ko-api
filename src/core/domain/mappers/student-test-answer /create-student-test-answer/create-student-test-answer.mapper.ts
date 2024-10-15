@@ -14,7 +14,8 @@ export class CreateStudentTestAnswerMapper extends Mapper<
 
     studentTestAnswer.testId = data.testId;
     studentTestAnswer.studentId = studentId;
-    studentTestAnswer.answerId = data.answerId;
+    studentTestAnswer.answerId = data.answerId as string;
+    studentTestAnswer.openAnswer = data.openAnswer;
 
     return studentTestAnswer;
   }

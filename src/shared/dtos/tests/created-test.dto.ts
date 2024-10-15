@@ -1,7 +1,7 @@
 export class CreatedTestDto {
   id: string;
   title: string;
-  duration: number;
+  duration: string;
   isActive: boolean;
   subjectId: string;
 }
