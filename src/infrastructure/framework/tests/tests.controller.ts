@@ -46,8 +46,11 @@ export class TestsController {
 
   @ApiParam({ name: 'classId', type: 'string' })
   @Get('by-class/:classId')
-  findByClassId(@Param('classId') classId: string) {
-    return this.findTestsByClassIdUseCase.execute(classId);
+  findByClassId(
+    @GetUser() user: UserWithoutPassword,
+    @Param('classId') classId: string,
+  ) {
+    return this.findTestsByClassIdUseCase.execute(classId, user.id);
   }
 
   @Post()

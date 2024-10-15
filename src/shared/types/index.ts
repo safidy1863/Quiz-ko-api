@@ -5,3 +5,5 @@ export type QuestionsWithAnswersType = QuestionEntity & {
 };
 
 export type UserWithoutPassword = Omit<UserEntity, 'password'>;
+
+export type StatusQuestion = 'New' | 'Completed' | 'In progress';

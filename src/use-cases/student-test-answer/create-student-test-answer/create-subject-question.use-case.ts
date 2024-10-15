@@ -6,6 +6,8 @@ import {
   AnswersRepository,
   CreateStudentTestAnswerMapper,
   AnswerEntity,
+  QuestionsRepository,
+  ResultsRepository,
 } from '@/core';
 import {
   CreateStudentTestAnswerDto,
@@ -22,6 +24,8 @@ export class CreateStudentTestAnswerUseCase implements UseCase<string> {
     private readonly testRepository: TestsRepository,
     private readonly studentsRepository: StudentsRepository,
     private readonly answersRepository: AnswersRepository,
+    private readonly questionsRepository: QuestionsRepository,
+    private readonly resutlsRepository: ResultsRepository,
   ) {
     this.createStudentTestAnswerMapper = new CreateStudentTestAnswerMapper();
   }
@@ -87,6 +91,30 @@ export class CreateStudentTestAnswerUseCase implements UseCase<string> {
         student.id,
       );
       await this.repository.create(entity);
+
+      // Results
+      if (answer.isCorrect) {
+        const question = await this.questionsRepository.findOne(
+          answer.questionId,
+        );
+
+        const results = await this.resutlsRepository.findByStudentIdAndTestId(
+          student.id,
+          test.id,
+        );
+
+        if (results)
+          await this.resutlsRepository.update(results.id, {
+            interimScore: results.interimScore + question.point,
+          });
+        else {
+          await this.resutlsRepository.create({
+            testId: test.id,
+            studentId: student.id,
+            interimScore: question.point,
+          });
+        }
+      }
     }
 
     return successMessage().reply;

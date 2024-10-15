@@ -5,8 +5,8 @@ import { PrismaService } from './prisma.service';
 export class PrismaResultsRepository implements ResultsRepository {
   constructor(private prisma: PrismaService) {}
 
-  create(data: ResultEntity): Promise<ResultEntity> {
-    throw new Error('Method not implemented.');
+  async create(data: ResultEntity): Promise<ResultEntity> {
+    return this.prisma.result.create({ data });
   }
   findAll(filter?: Partial<ResultEntity>): Promise<ResultEntity[]> {
     throw new Error('Method not implemented.');
@@ -26,8 +26,8 @@ export class PrismaResultsRepository implements ResultsRepository {
     return this.prisma.result.findFirst({ where: { testId, studentId } });
   }
 
-  update(id: string, data: Partial<ResultEntity>): Promise<ResultEntity> {
-    throw new Error('Method not implemented.');
+  async update(id: string, data: Partial<ResultEntity>): Promise<ResultEntity> {
+    return this.prisma.result.update({ where: { id }, data });
   }
   remove(id: string): Promise<void> {
     throw new Error('Method not implemented.');

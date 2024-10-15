@@ -3,6 +3,8 @@ import { TestsController } from './tests.controller';
 import {
   PrismaAnswersRepository,
   PrismaClassRepository,
+  PrismaQuestionsRepository,
+  PrismaResultsRepository,
   PrismaService,
   PrismaStudentsRepository,
   PrismaStudentTestAnswerRepository,
@@ -14,6 +16,8 @@ import {
 import {
   AnswersRepository,
   ClassRepository,
+  QuestionsRepository,
+  ResultsRepository,
   StudentsRepository,
   StudentTestAnswerRepository,
   SubjectsQuestionsRepository,
@@ -68,9 +72,21 @@ import {
       inject: [PrismaService],
     },
     {
+      provide: QuestionsRepository,
+      useFactory: (prisma: PrismaService) =>
+        new PrismaQuestionsRepository(prisma),
+      inject: [PrismaService],
+    },
+    {
       provide: SubjectsQuestionsRepository,
       useFactory: (prisma: PrismaService) =>
         new PrismaSubjectsQuestionsRepository(prisma),
+      inject: [PrismaService],
+    },
+    {
+      provide: ResultsRepository,
+      useFactory: (prisma: PrismaService) =>
+        new PrismaResultsRepository(prisma),
       inject: [PrismaService],
     },
     {
@@ -85,13 +101,26 @@ import {
         testsClassRepository: TestsClassRepository,
         testsRepository: TestsRepository,
         classRepository: ClassRepository,
+        studentsRepository: StudentsRepository,
+        subjectsQuestionsRepository: SubjectsQuestionsRepository,
+        studentsTestsAnswersRepository: StudentTestAnswerRepository,
       ) =>
         new FindTestsByClassIdUseCase(
           testsClassRepository,
           testsRepository,
           classRepository,
+          studentsRepository,
+          subjectsQuestionsRepository,
+          studentsTestsAnswersRepository,
         ),
-      inject: [TestsClassRepository, TestsRepository, ClassRepository],
+      inject: [
+        TestsClassRepository,
+        TestsRepository,
+        ClassRepository,
+        StudentsRepository,
+        SubjectsQuestionsRepository,
+        StudentTestAnswerRepository,
+      ],
     },
     {
       provide: FindOneTestUseCase,
@@ -116,18 +145,24 @@ import {
         testRepository: TestsRepository,
         studentsRepository: StudentsRepository,
         answersRepository: AnswersRepository,
+        questionsRepository: QuestionsRepository,
+        resutlsRepository: ResultsRepository,
       ) =>
         new CreateStudentTestAnswerUseCase(
           repository,
           testRepository,
           studentsRepository,
           answersRepository,
+          questionsRepository,
+          resutlsRepository,
         ),
       inject: [
         StudentTestAnswerRepository,
         TestsRepository,
         StudentsRepository,
         AnswersRepository,
+        QuestionsRepository,
+        ResultsRepository,
       ],
     },
     {

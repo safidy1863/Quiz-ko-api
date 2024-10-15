@@ -20,6 +20,16 @@ export class PrismaStudentTestAnswerRepository
   findOne(id: string): Promise<StudentTestAnswerEntity> {
     throw new Error('Method not implemented.');
   }
+
+  async findByTestIdStudentId(
+    studentId: string,
+    testId: string,
+  ): Promise<StudentTestAnswerEntity[]> {
+    return this.prisma.studentTestAnswer.findMany({
+      where: { testId, studentId },
+    });
+  }
+
   update(
     id: string,
     data: Partial<StudentTestAnswerEntity>,

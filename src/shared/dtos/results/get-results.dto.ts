@@ -1,5 +1,7 @@
-import { TestEntity } from '@/core';
-
-export class GetResultsDto extends TestEntity {
+export class GetResultsDto {
+  title: string;
+  duration: string;
+  isActive: boolean;
+  subjectId: string;
   score: number;
 }
